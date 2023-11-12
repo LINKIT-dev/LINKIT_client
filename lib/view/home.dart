@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/home_controller.dart';
+import 'figures.dart';
+import 'profile.dart';
+import 'workspace.dart';
+import 'package:vs_scrollbar/vs_scrollbar.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -10,6 +14,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    // Dispose the controller when the widget is removed
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +42,39 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ProfileContainer(),
+              Line(width: 320),
+              SearchContainer(),
+              Line(width: 320),
+              SizedBox(height: 15),
+              VsScrollbar(
+                controller: _scrollController,
+                showTrackOnHover: true, // default false
+                isAlwaysShown: true, // default false
+                scrollbarFadeDuration: Duration(
+                    milliseconds: 500), // default : Duration(milliseconds: 300)
+                scrollbarTimeToFade: Duration(
+                    milliseconds: 800), // default : Duration(milliseconds: 600)
+                style: VsScrollbarStyle(
+                  hoverThickness: 10.0, // default 12.0
+                  radius: Radius.circular(10), // default Radius.circular(8.0)
+                  thickness: 5.0, // [ default 8.0 ]
+                ),
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Workspace(),
+                      Workspace(),
+                      Workspace(),
+                      Workspace(),
+                      Workspace(),
+                      Workspace(),
+                      Workspace(),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -68,55 +114,32 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(kToolbarHeight); // AppBar의 높이 설정
 }
 
-class ProfileContainer extends StatefulWidget {
-  const ProfileContainer({super.key});
+class SearchContainer extends StatelessWidget {
+  const SearchContainer({super.key});
 
-  @override
-  State<ProfileContainer> createState() => _ProfileContainerState();
-}
-
-class _ProfileContainerState extends State<ProfileContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 30, right: 30),
-      width: 360,
-      height: 120,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        color: Colors.transparent,
+      padding: const EdgeInsets.only(
+        left: 40,
+        right: 16,
+        top: 15,
+        bottom: 16,
       ),
       child: const Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                "HELLO,\nKuromi58384",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 5),
-              Text(
-                "kuromi03@naver.com",
-                style: TextStyle(fontSize: 12),
-              ),
-            ],
+        children: [
+          Icon(
+            Icons.search,
           ),
           SizedBox(
-            width: 25,
+            width: 10,
           ),
-          CircleAvatar(
-            radius: 45, // 원래의 radius + border의 절반
-            backgroundColor: Colors.black87, // 태두리 색상
-            child: CircleAvatar(
-              radius: 42,
-              backgroundImage: AssetImage("assets/image/Curomi.png"),
+          Text(
+            "Project name, Hash Tag ...",
+            style: TextStyle(
+              color: Colors.grey,
             ),
-          ),
+          )
         ],
       ),
     );
