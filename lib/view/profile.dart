@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../controller/profile_controller.dart';
+import 'package:get/get.dart';
 
 class ProfileContainer extends StatefulWidget {
   const ProfileContainer({super.key});
@@ -8,6 +10,9 @@ class ProfileContainer extends StatefulWidget {
 }
 
 class _ProfileContainerState extends State<ProfileContainer> {
+  // ProfileController 인스턴스를 가져오거나 생성합니다.
+  final ProfileController profileController = Get.put(ProfileController());
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,14 +23,14 @@ class _ProfileContainerState extends State<ProfileContainer> {
         borderRadius: BorderRadius.circular(8.0),
         color: Colors.transparent,
       ),
-      child: const Row(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                "HELLO,\nKuromi58384",
+                "HELLO,\n${profileController.pm.value.name}",
                 style: TextStyle(
                   fontSize: 25,
                   fontFamily: 'jalnanGothic',
@@ -33,7 +38,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
               ),
               SizedBox(height: 5),
               Text(
-                "kuromi03@naver.com",
+                profileController.pm.value.email,
                 style: TextStyle(fontSize: 12),
               ),
             ],
@@ -46,7 +51,8 @@ class _ProfileContainerState extends State<ProfileContainer> {
             backgroundColor: Colors.black87, // 태두리 색상
             child: CircleAvatar(
               radius: 42,
-              backgroundImage: AssetImage("assets/image/Curomi.png"),
+              backgroundImage:
+                  NetworkImage(profileController.pm.value.profile_image),
             ),
           ),
         ],
