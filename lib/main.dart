@@ -5,7 +5,7 @@ import 'view/intro_page.dart';
 import 'view/login_page.dart';
 
 // is_logged는 서버에서 로그인을 했을 때
-bool is_logged = false;
+bool is_logged = true;
 
 void main() => runApp(MyApp());
 

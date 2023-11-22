@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'detail_page.dart';
+import 'team_page.dart';
 
 class Workspace extends StatelessWidget {
   Workspace(
@@ -23,7 +23,7 @@ class Workspace extends StatelessWidget {
       height: 200,
       child: GestureDetector(
         onTap: () {
-          Get.to(() => DetailsPage());
+          Get.to(() => team_space());
         },
         child: Stack(
           children: [
