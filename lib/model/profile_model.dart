@@ -1,12 +1,12 @@
 class ProfileModel {
-  final String name;
-  final String email;
-  final String profile_image;
+  String name;
+  String email;
+  String profile_image;
 
   ProfileModel({
-    required this.name,
-    required this.email,
-    required this.profile_image,
+    this.name = '',
+    this.email = '',
+    this.profile_image = '',
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) {

@@ -3,7 +3,8 @@ import '../controller/profile_controller.dart';
 import 'package:get/get.dart';
 
 class ProfileContainer extends StatefulWidget {
-  const ProfileContainer({super.key});
+  final ProfileModel profile;
+  const ProfileContainer({super.key, required this.profile});
 
   @override
   State<ProfileContainer> createState() => _ProfileContainerState();
@@ -30,7 +31,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                "HELLO,\n${profileController.pm.value.name}",
+                "HELLO,\n${widget.profile.name}",
                 style: TextStyle(
                   fontSize: 25,
                   fontFamily: 'jalnanGothic',

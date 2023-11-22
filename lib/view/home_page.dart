@@ -6,6 +6,7 @@ import 'workspace.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
 import '../controller/teamspace_controller.dart';
 import '../controller/BottomNavigator.dart';
+import '../controller/porfile_controller.dart';
 import 'tag_page.dart';
 import 'notice_page.dart';
 import 'setting_page.dart';
@@ -65,7 +66,7 @@ class _MainPageState extends State<MainPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ProfileContainer(),
+              ProfileContainer(profile: ProfileController.pm),
               Line(width: 320),
               SearchContainer(),
               Line(width: 320),

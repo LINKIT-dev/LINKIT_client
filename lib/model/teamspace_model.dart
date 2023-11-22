@@ -5,7 +5,7 @@ class TeamSpaceModel {
   TeamSpaceModel({required this.teamNum, required this.teams});
 
   factory TeamSpaceModel.fromJson(Map<String, dynamic> json) {
-    var list = json['lst'] as List;
+    var list = json['teams'] as List;
     List<TeamModel> teamList = list.map((i) => TeamModel.fromJson(i)).toList();
     return TeamSpaceModel(
       teamNum: json['team_num'],

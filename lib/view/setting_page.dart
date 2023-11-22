@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:get/get.dart';
+import 'team_setting_page.dart';
+import 'team_add_page.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -54,13 +56,15 @@ class SettingBody extends StatelessWidget {
               leading: Icon(Icons.business),
               title: Text('Team Setting'),
               onPressed: (BuildContext context) {
-                _showTeamSelectModal(context);
+                Get.to(() => TeamSettingPage());
               },
             ),
             SettingsTile.navigation(
               leading: Icon(Icons.add),
               title: Text('Team Add'),
-              onPressed: (BuildContext context) {},
+              onPressed: (BuildContext context) {
+                Get.to(() => TeamAddPage());
+              },
             ),
             SettingsTile.navigation(
               leading: Icon(Icons.info),

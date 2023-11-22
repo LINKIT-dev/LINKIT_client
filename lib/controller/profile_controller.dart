@@ -1,11 +1,22 @@
 import 'package:get/get.dart';
 import '../model/profile_model.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:get/get.dart';
+import 'dart:convert';
 
 class ProfileController extends GetxController {
-  final pm = ProfileModel(
-          name: 'Kuromi58384',
-          email: 'kuromi03@naver.com',
-          profile_image:
-              'https://i.pinimg.com/originals/19/fb/56/19fb56bd0d8fe6842965135b2ff33e95.jpg')
-      .obs;
+  final pm = ProfileModel().obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchPostFromJson();
+  }
+
+  Future<void> fetchPostFromJson() async {
+    final String response =
+        await rootBundle.loadString('asset/test/profile.json');
+    final data = await json.decode(response);
+    pm.value = ProfileModel.fromJson(data);
+  }
 }
