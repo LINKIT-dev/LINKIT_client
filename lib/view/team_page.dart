@@ -87,7 +87,7 @@ class _team_spaceState extends State<team_space> {
             child: IconButton(
               icon: const Icon(Icons.arrow_back_ios),
               onPressed: () {
-                print('menu button is clicked');
+                Get.back();
               },
             ),
           ),

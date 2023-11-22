@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:linkit_client/view/team_add_page.dart';
-import '../model/teamspace_model.dart';
 import 'figures.dart';
 import 'profile.dart';
 import 'workspace.dart';
@@ -10,7 +9,6 @@ import '../controller/teamspace_controller.dart';
 import '../controller/BottomNavigator.dart';
 import '../controller/profile_controller.dart';
 import 'tag_page.dart';
-import 'notice_page.dart';
 import 'setting_page.dart';
 import 'package:linkit_client/meta_data.dart';
 
@@ -172,8 +170,6 @@ List<Widget> _Workspace() {
       wd.add(Workspace(
         name: team?.teamName ?? 'Invalid Team',
         tags: team?.tags ?? ['tag1', 'tag2', 'tag3'],
-        colors: team?.colors ??
-            ['0xffffdddd', '0xffffe5dd', '0xffffeedd'], // 여기에 적절한 값이 필요
         image: team?.logoImage ?? '', // 여기에 적절한 값이 필요
       ));
     }

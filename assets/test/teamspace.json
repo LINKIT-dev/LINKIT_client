@@ -5,13 +5,11 @@
       "team_name": "Team A",
       "logo_image": "https://i.ibb.co/V9rV08m/logo-003.jpg",
       "tags": ["tag1", "tag2", "tag3"],
-      "colors": ["0xffddddff", "0xffe5ddff", "0xffeeddff"]
     },
     {
       "team_name": "Team B",
       "logo_image": "https://i.ibb.co/V9rV08m/logo-003.jpg",
       "tags": ["tag4", "tag5", "tag6"],
-      "colors": ["0xffddddff", "0xffe5ddff", "0xffeeddff"]
     }
   ]
 }

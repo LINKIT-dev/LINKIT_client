@@ -54,7 +54,7 @@ class _like_spaceState extends State<like_space> {
             child: IconButton(
               icon: const Icon(Icons.arrow_back_ios),
               onPressed: () {
-                Get.to(() => team_space());
+                Get.back();
               },
             ),
           ),

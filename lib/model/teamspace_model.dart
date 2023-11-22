@@ -28,15 +28,13 @@ class TeamModel {
   String? teamName;
   String? logoImage;
   List<String>? tags;
-  List<String>? colors;
 
-  TeamModel({this.teamName, this.logoImage, this.tags, this.colors});
+  TeamModel({this.teamName, this.logoImage, this.tags});
 
   TeamModel.fromJson(Map<String, dynamic> json) {
     teamName = json['team_name'];
     logoImage = json['logo_image'];
     tags = json['tags'].cast<String>();
-    colors = json['colors'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
@@ -44,7 +42,6 @@ class TeamModel {
     data['team_name'] = this.teamName;
     data['logo_image'] = this.logoImage;
     data['tags'] = this.tags;
-    data['colors'] = this.colors;
     return data;
   }
 }

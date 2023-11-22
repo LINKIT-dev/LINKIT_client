@@ -49,7 +49,7 @@ void showPost(BuildContext context, String image_url, String title,
                         backgroundColor: const Color(0xffDDCEDD),
                       );
                     },
-                    icon: Icon(Icons.copy),
+                    icon: const Icon(Icons.copy),
                   ),
                   const SizedBox(
                     height: 20,
@@ -85,7 +85,7 @@ void showPost(BuildContext context, String image_url, String title,
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Wrap(
@@ -101,7 +101,7 @@ void showPost(BuildContext context, String image_url, String title,
                                     MaterialStateProperty.all<Color>(
                                         Color(Rand_col())), //수정
                                 padding: MaterialStateProperty.all<EdgeInsets>(
-                                    EdgeInsets.only(top: 5, bottom: 5)),
+                                    const EdgeInsets.only(top: 5, bottom: 5)),
                               ),
                               child: Text(
                                 tag,
@@ -114,7 +114,7 @@ void showPost(BuildContext context, String image_url, String title,
                             ))
                         .toList(),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   SizedBox(

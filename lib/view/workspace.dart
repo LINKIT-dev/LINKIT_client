@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:linkit_client/view/tag.dart';
 import 'team_page.dart';
+import '../meta_data.dart';
+import 'tag_page.dart';
 
 class Workspace extends StatelessWidget {
   Workspace(
-      {super.key,
-      required this.name,
-      required this.tags,
-      required this.colors,
-      required this.image});
+      {super.key, required this.name, required this.tags, required this.image});
 
   final List<String> tags;
-  final List<String> colors;
   final String name;
   final String image;
 
@@ -58,18 +56,13 @@ class Workspace extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      TagButton(text: tags[0]),
                       TagButton(
-                          text: tags[0],
-                          color: Color(
-                              int.parse(colors[0].substring(2), radix: 16))),
+                        text: tags[1],
+                      ),
                       TagButton(
-                          text: tags[1],
-                          color: Color(
-                              int.parse(colors[1].substring(2), radix: 16))),
-                      TagButton(
-                          text: tags[2],
-                          color: Color(
-                              int.parse(colors[2].substring(2), radix: 16))),
+                        text: tags[2],
+                      ),
                     ],
                   ),
                 ],
@@ -95,10 +88,9 @@ class Workspace extends StatelessWidget {
 }
 
 class TagButton extends StatelessWidget {
-  const TagButton({super.key, required this.text, required this.color});
+  const TagButton({super.key, required this.text});
 
   final String text;
-  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +100,7 @@ class TagButton extends StatelessWidget {
       },
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        backgroundColor: color,
+        backgroundColor: Color(Rand_col()),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
