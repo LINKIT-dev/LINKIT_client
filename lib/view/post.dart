@@ -5,8 +5,8 @@ import '../view/copylink.dart';
 import '../view/tag.dart';
 
 void showPost(BuildContext context, String image_url, String title,
-    String description, String _url, int tag_num, String tag) {
-  List<String> tags = tag.split(',');
+    String description, String _url, List<String> tags) {
+  // List<String> tags = tag.split(',');
 
   showModalBottomSheet(
     context: context,
@@ -91,8 +91,7 @@ void showPost(BuildContext context, String image_url, String title,
                   Wrap(
                     spacing: 8.0, // 태그 사이의 가로 간격
                     runSpacing: 4.0, // 태그 사이의 세로 간격
-                    children: tags
-                        .map((tag) => ElevatedButton(
+                    children: tags.map((tag) => ElevatedButton(
                               onPressed: () {
                                 // 태그 버튼 클릭 시 동작
                               },

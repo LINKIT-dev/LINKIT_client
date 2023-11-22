@@ -62,8 +62,7 @@ class _OthChatFormState extends State<OthChatForm> {
                   widget.post.title,
                   widget.post.description,
                   widget.post.url,
-                  widget.post.tagNum,
-                  widget.post.tag);
+                  widget.post.tags);
             },
             child: Container(
               margin: const EdgeInsets.only(left: 15),
@@ -226,8 +225,7 @@ class _UsrChatFormState extends State<UsrChatForm> {
                   widget.post.title,
                   widget.post.description,
                   widget.post.url,
-                  widget.post.tagNum,
-                  widget.post.tag);
+                  widget.post.tags);
             },
             child: Container(
               margin: const EdgeInsets.only(left: 15),

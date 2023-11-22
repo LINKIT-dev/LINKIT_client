@@ -7,8 +7,7 @@
       "title": "[Flutter] pub get이 안될때",
       "description": "Deep dive into Flutter state management solutions.",
       "url": "https://jinsiri.tistory.com/579",
-      "tagNum": 2,
-      "tag": "flutter,state management"
+      "tags": ["flutter"," state management"]
     },
     {
       "username": "Eunjin",
@@ -17,8 +16,7 @@
       "title": "小さくて大事な ♡´･ᴗ･`♡",
       "description": "타이어보다 싸다 ! 내 일상 무료공개 !",
       "url": "https://blog.naver.com/ibsuny3214",
-      "tagNum": 3,
-      "tag": "blog,daily,enjin"
+      "tags": ["flutter"," state management","eunjin"]
     },
     {
       "username": "Seungho",
@@ -27,8 +25,7 @@
       "title": "Flutter - Build apps for any screen",
       "description": "Flutter transforms the entire app development process. Build, test, and deploy beautiful mobile, web, desktop, and embedded apps from a single codebase.",
       "url": "//flutter.dev/",
-      "tagNum": 3,
-      "tag": "flutter,apps,dev"
+      "tags": ["flutter"," state management","dev"]
     },
     {
       "username": "Jimin",
@@ -37,8 +34,7 @@
       "title": "그루터기 학습멘토링 같이에듀",
       "description": "그루터기 학습멘토링 같이에듀는 사각지대에 놓여있는 청소년의 학습결손을 보완하고, 교육격차를 해소하여 건강한 성장을 지원합니다.",
       "url": "https://withedu.or.kr",
-      "tagNum": 2,
-      "tag": "같이에듀,학습멘토링"
+      "tags": ["withedu","edu"]
     },
     {
       "username": "Jimin",
@@ -47,8 +43,7 @@
       "title": "Naver",
       "description": "네이버 메인에서 다양한 정보와 유용한 컨텐츠를 만나 보세요",
       "url": "https://naver.com",
-      "tagNum": 1,
-      "tag": "naver"
+      "tags": ["naver"]
     }
   ]
 
