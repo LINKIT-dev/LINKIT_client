@@ -1,21 +1,38 @@
-import 'teamspacebox_model.dart';
-
 class TeamSpaceModel {
-  final int team_num;
-  final List<TeamSpaceBoxModel> lst;
+  final int teamNum;
+  final List<TeamModel> teams;
 
-  TeamSpaceModel({
-    required this.team_num,
-    required this.lst,
-  });
+  TeamSpaceModel({required this.teamNum, required this.teams});
 
   factory TeamSpaceModel.fromJson(Map<String, dynamic> json) {
     var list = json['lst'] as List;
-    List<TeamSpaceBoxModel> lstList =
-        list.map((i) => TeamSpaceBoxModel.fromJson(i)).toList();
+    List<TeamModel> teamList = list.map((i) => TeamModel.fromJson(i)).toList();
     return TeamSpaceModel(
-      team_num: json['team_num'],
-      lst: lstList,
+      teamNum: json['team_num'],
+      teams: teamList,
+    );
+  }
+}
+
+class TeamModel {
+  final String teamName;
+  final String logoImage;
+  final List<String> tags;
+  final List<String> colors;
+
+  TeamModel({
+    required this.teamName,
+    required this.logoImage,
+    required this.tags,
+    required this.colors,
+  });
+
+  factory TeamModel.fromJson(Map<String, dynamic> json) {
+    return TeamModel(
+      teamName: json['team_name'],
+      logoImage: json['logo_image'],
+      tags: List<String>.from(json['tags']),
+      colors: List<String>.from(json['colors']),
     );
   }
 }
