@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
               Image.asset('assets/image/linkit_logo.png'),
               IconButton(
                 onPressed: () {
-                  Get.off(Home());
+                  Get.off(() => Home());
                 },
                 icon: Image.asset(
                   'assets/image/Kakao login.png',

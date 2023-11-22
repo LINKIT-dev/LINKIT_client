@@ -1,0 +1,17 @@
+{
+  "team_num": "2",
+  "teams": [
+    {
+      "team_name": "Team A",
+      "logo_image": "logo_url_a",
+      "tags": ["tag1", "tag2"],
+      "colors": ["#FF0000", "#800000"]
+    },
+    {
+      "team_name": "Team B",
+      "logo_image": "logo_url_b",
+      "tags": ["tag3", "tag4"],
+      "colors": ["#FF0000", "#800000"]
+    }
+  ]
+}

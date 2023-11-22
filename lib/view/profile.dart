@@ -12,11 +12,8 @@ class ProfileContainer extends StatefulWidget {
 class _ProfileContainerState extends State<ProfileContainer> {
   // ProfileController 인스턴스를 가져오거나 생성합니다.
 
-
   @override
   Widget build(BuildContext context) {
-    print('출력: ');
-    print(widget.profile.name);
     return Container(
       padding: EdgeInsets.only(left: 30, right: 30),
       width: 360,
@@ -53,8 +50,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
             backgroundColor: Colors.black87, // 태두리 색상
             child: CircleAvatar(
               radius: 42,
-              backgroundImage:
-                  NetworkImage(widget.profile.profile_image),
+              backgroundImage: NetworkImage(widget.profile.profile_image),
             ),
           ),
         ],

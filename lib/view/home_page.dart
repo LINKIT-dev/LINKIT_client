@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:linkit_client/view/team_add_page.dart';
+import '../model/teamspace_model.dart';
 import 'figures.dart';
 import 'profile.dart';
 import 'workspace.dart';
@@ -10,6 +12,7 @@ import '../controller/profile_controller.dart';
 import 'tag_page.dart';
 import 'notice_page.dart';
 import 'setting_page.dart';
+import 'package:linkit_client/meta_data.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -57,49 +60,51 @@ class _MainPageState extends State<MainPage> {
 
     return Scaffold(
       body: Obx(() => (Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              "assets/image/linkit_bg.png",
-            ),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ProfileContainer(profile: _profileController.pm.value),
-
-              Line(width: 320),
-              SearchContainer(),
-              Line(width: 320),
-              SizedBox(height: 15),
-              VsScrollbar(
-                controller: _scrollController,
-                showTrackOnHover: true, // default false
-                isAlwaysShown: true, // default false
-                scrollbarFadeDuration: Duration(
-                    milliseconds: 500), // default : Duration(milliseconds: 300)
-                scrollbarTimeToFade: Duration(
-                    milliseconds: 800), // default : Duration(milliseconds: 600)
-                style: VsScrollbarStyle(
-                  hoverThickness: 10.0, // default 12.0
-                  radius: Radius.circular(10), // default Radius.circular(8.0)
-                  thickness: 5.0, // [ default 8.0 ]
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  "assets/image/linkit_bg.png",
                 ),
-                child: SingleChildScrollView(
-                  controller: _scrollController,
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: _Workspace(),
-                  ),
-                ),
+                fit: BoxFit.cover,
               ),
-            ],
-          ),
-        ),
-      ))),
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ProfileContainer(profile: _profileController.pm.value),
+                  Line(width: 320),
+                  SearchContainer(),
+                  Line(width: 320),
+                  SizedBox(height: 15),
+                  VsScrollbar(
+                    controller: _scrollController,
+                    showTrackOnHover: true, // default false
+                    isAlwaysShown: true, // default false
+                    scrollbarFadeDuration: Duration(
+                        milliseconds:
+                            500), // default : Duration(milliseconds: 300)
+                    scrollbarTimeToFade: Duration(
+                        milliseconds:
+                            800), // default : Duration(milliseconds: 600)
+                    style: VsScrollbarStyle(
+                      hoverThickness: 10.0, // default 12.0
+                      radius:
+                          Radius.circular(10), // default Radius.circular(8.0)
+                      thickness: 5.0, // [ default 8.0 ]
+                    ),
+                    child: SingleChildScrollView(
+                      controller: _scrollController,
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: _Workspace(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ))),
     );
   }
 }
@@ -140,40 +145,41 @@ List<Widget> _Workspace() {
   final TeamSpaceController teamspaceController =
       Get.put(TeamSpaceController());
 
-  List<Widget> widgets = [];
-  int teamCount = teamspaceController.ts.value.teams.length;
-  print(teamspaceController.ts.value.teams);
+  List<Widget> wd = [];
+  int? teamCount = teamspaceController.ts.value.teamNum;
+  print(teamCount);
 
   if (teamCount == 0) {
-    widgets.add(
+    wd.add(
       Container(
-        padding: EdgeInsets.only(top: 30),
+        padding: const EdgeInsets.only(top: 30),
         child: CircleAvatar(
-          backgroundColor: Color(0xffffadb6), // 원하는 배경색 설정
+          backgroundColor: Color(pColor), // 원하는 배경색 설정
           radius: 30, // 원의 반지름 조정으로 크기 조절
           child: IconButton(
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
             iconSize: 30, // 아이콘 크기 조정
             color: Colors.white, // 아이콘 색상 설정
             onPressed: () {
               // 버튼 클릭 시 실행할 동작
+              Get.to(() => TeamAddPage());
             },
           ),
         ),
       ),
     );
-    return widgets;
+    return wd;
   } else {
-    for (int i = 0; i < teamCount; i++) {
-      var team = teamspaceController.ts.value.teams[i];
-      widgets.add(Obx(() => Workspace(
-            name: team.teamName,
-            tags: team.tags,
-            colors: team.colors, // 여기에 적절한 값이 필요
-            image: team.logoImage, // 여기에 적절한 값이 필요
-          )));
+    for (int i = 0; i < teamCount!; i++) {
+      final team = teamspaceController.ts.value.teams?[i];
+      wd.add(Workspace(
+        name: team?.teamName ?? 'Invalid Team',
+        tags: team?.tags ?? ['tag1', 'tag2', 'tag3'],
+        colors: team?.colors ?? [], // 여기에 적절한 값이 필요
+        image: team?.logoImage ?? '', // 여기에 적절한 값이 필요
+      ));
     }
 
-    return widgets;
+    return wd;
   }
 }

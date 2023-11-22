@@ -1,38 +1,50 @@
 class TeamSpaceModel {
-  final int teamNum;
-  final List<TeamModel> teams;
+  int? teamNum;
+  List<TeamModel>? teams;
 
-  TeamSpaceModel({required this.teamNum, required this.teams});
+  TeamSpaceModel({this.teamNum, this.teams});
 
-  factory TeamSpaceModel.fromJson(Map<String, dynamic> json) {
-    var list = json['teams'] as List;
-    List<TeamModel> teamList = list.map((i) => TeamModel.fromJson(i)).toList();
-    return TeamSpaceModel(
-      teamNum: json['team_num'],
-      teams: teamList,
-    );
+  TeamSpaceModel.fromJson(Map<String, dynamic> json) {
+    teamNum = int.tryParse(json['team_num']) ?? 0;
+    if (json['teams'] != null) {
+      teams = <TeamModel>[];
+      json['teams'].forEach((v) {
+        teams!.add(new TeamModel.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['team_num'] = this.teamNum;
+    if (this.teams != null) {
+      data['teams'] = this.teams!.map((v) => v.toJson()).toList();
+    }
+    return data;
   }
 }
 
 class TeamModel {
-  final String teamName;
-  final String logoImage;
-  final List<String> tags;
-  final List<String> colors;
+  String? teamName;
+  String? logoImage;
+  List<String>? tags;
+  List<String>? colors;
 
-  TeamModel({
-    required this.teamName,
-    required this.logoImage,
-    required this.tags,
-    required this.colors,
-  });
+  TeamModel({this.teamName, this.logoImage, this.tags, this.colors});
 
-  factory TeamModel.fromJson(Map<String, dynamic> json) {
-    return TeamModel(
-      teamName: json['team_name'],
-      logoImage: json['logo_image'],
-      tags: List<String>.from(json['tags']),
-      colors: List<String>.from(json['colors']),
-    );
+  TeamModel.fromJson(Map<String, dynamic> json) {
+    teamName = json['team_name'];
+    logoImage = json['logo_image'];
+    tags = json['tags'].cast<String>();
+    colors = json['colors'].cast<String>();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['team_name'] = this.teamName;
+    data['logo_image'] = this.logoImage;
+    data['tags'] = this.tags;
+    data['colors'] = this.colors;
+    return data;
   }
 }
