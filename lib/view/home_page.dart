@@ -6,7 +6,7 @@ import 'workspace.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
 import '../controller/teamspace_controller.dart';
 import '../controller/BottomNavigator.dart';
-import '../controller/porfile_controller.dart';
+import '../controller/profile_controller.dart';
 import 'tag_page.dart';
 import 'notice_page.dart';
 import 'setting_page.dart';
@@ -42,6 +42,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final ScrollController _scrollController = ScrollController();
+  final _profileController = Get.put(ProfileController());
 
   @override
   void dispose() {
@@ -52,8 +53,10 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    //var profile = _profileController.pm.value;
+
     return Scaffold(
-      body: Container(
+      body: Obx(() => (Container(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
@@ -66,7 +69,8 @@ class _MainPageState extends State<MainPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ProfileContainer(profile: ProfileController.pm),
+              ProfileContainer(profile: _profileController.pm.value),
+
               Line(width: 320),
               SearchContainer(),
               Line(width: 320),
@@ -95,7 +99,7 @@ class _MainPageState extends State<MainPage> {
             ],
           ),
         ),
-      ),
+      ))),
     );
   }
 }

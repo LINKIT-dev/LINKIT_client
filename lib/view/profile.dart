@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../controller/profile_controller.dart';
-import 'package:get/get.dart';
+import '../model/profile_model.dart';
 
 class ProfileContainer extends StatefulWidget {
   final ProfileModel profile;
@@ -12,10 +11,12 @@ class ProfileContainer extends StatefulWidget {
 
 class _ProfileContainerState extends State<ProfileContainer> {
   // ProfileController 인스턴스를 가져오거나 생성합니다.
-  final ProfileController profileController = Get.put(ProfileController());
+
 
   @override
   Widget build(BuildContext context) {
+    print('출력: ');
+    print(widget.profile.name);
     return Container(
       padding: EdgeInsets.only(left: 30, right: 30),
       width: 360,
@@ -39,7 +40,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
               ),
               SizedBox(height: 5),
               Text(
-                profileController.pm.value.email,
+                widget.profile.email,
                 style: TextStyle(fontSize: 12),
               ),
             ],
@@ -53,7 +54,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
             child: CircleAvatar(
               radius: 42,
               backgroundImage:
-                  NetworkImage(profileController.pm.value.profile_image),
+                  NetworkImage(widget.profile.profile_image),
             ),
           ),
         ],
