@@ -21,7 +21,7 @@ class Workspace extends StatelessWidget {
       height: 200,
       child: GestureDetector(
         onTap: () {
-          Get.to(() => team_space());
+          Get.to(() => team_space(), arguments: [name,image]);
         },
         child: Stack(
           children: [

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../controller/profile_controller.dart';
+import '../controller/teamspace_controller.dart';
 import '../view/like_page.dart';
 import 'package:get/get.dart';
 import '../view/chat.dart';
@@ -18,6 +20,10 @@ class _team_spaceState extends State<team_space> {
 
   final ChatController chatController = Get.put(ChatController());
   final UserLikeController userlikeController = Get.put(UserLikeController());
+  final ProfileController _profileController = Get.put(ProfileController());
+
+  final String? name = Get.arguments[0] ?? '';
+  final String? img = Get.arguments[1] ?? '';
 
   @override
   Widget build(BuildContext context) {
@@ -42,15 +48,20 @@ class _team_spaceState extends State<team_space> {
           ),
           title: Container(
             padding: EdgeInsets.only(top: 16),
-            child: const Row(
+            child: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 CircleAvatar(
-                  backgroundImage: AssetImage('assets/image/user.png'),
+                  radius: 21, // 원래의 radius + border의 절반
+                  backgroundColor: Colors.black87, // 태두리 색상
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundImage: NetworkImage(img??''),
+                  ),
                 ),
                 SizedBox(width: 8), // 프로필 사진과 텍스트 사이의 간격
                 Text(
-                  'Oss Project',
+                  name??'',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
@@ -107,7 +118,7 @@ class _team_spaceState extends State<team_space> {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        chatController.Posts[index].username == 'Eunjin'
+                        chatController.Posts[index].username == _profileController.pm.value.name
                             ? UsrChatForm(
                                 post: chatController.Posts[index],
                                 like: userlikeController.Likes[index],

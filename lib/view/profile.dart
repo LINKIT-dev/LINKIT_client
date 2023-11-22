@@ -3,6 +3,7 @@ import '../model/profile_model.dart';
 
 class ProfileContainer extends StatefulWidget {
   final ProfileModel profile;
+
   const ProfileContainer({super.key, required this.profile});
 
   @override
@@ -23,25 +24,15 @@ class _ProfileContainerState extends State<ProfileContainer> {
         color: Colors.transparent,
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                "HELLO,\n${widget.profile.name}",
-                style: const TextStyle(
-                  fontSize: 25,
-                  fontFamily: 'jalnanGothic',
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            width: 25,
+          Text(
+            "HELLO,\n${widget.profile.name}",
+            style: const TextStyle(
+              fontSize: 25,
+              fontFamily: 'jalnanGothic',
+            ),
           ),
           CircleAvatar(
             radius: 45, // 원래의 radius + border의 절반
