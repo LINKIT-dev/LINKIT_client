@@ -54,7 +54,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(() => (Container(
+      body: Obx(() => Container(
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
@@ -99,7 +99,7 @@ class _MainPageState extends State<MainPage> {
                 ],
               ),
             ),
-          ))),
+          ))
     );
   }
 }

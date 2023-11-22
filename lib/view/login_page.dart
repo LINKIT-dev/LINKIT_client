@@ -46,45 +46,57 @@ class _LoginPageState extends State<LoginPage> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Center(
-          child: Column(
-            children: [
-              Image.asset(
-                'assets/image/linkit_logo.png',
+        body: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: 100,),
+                  SizedBox(
+                    height: 400,
+                    width: 400,
+                    child: Image.asset(
+                      'assets/image/linkit_logo.png',
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  TextField(
+                    controller: _uidController,
+                    decoration: InputDecoration(labelText: 'ID'),
+                  ),
+                  TextField(
+                    controller: _pwController,
+                    decoration: InputDecoration(labelText: 'Password'),
+                    obscureText: true,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  ElevatedButton(
+                    onPressed: _login,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xffffadb6),
+                    ),
+                    child: const Text('Login'),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.black87,
+                    ),
+                    child: const Text('Sign In'),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
               ),
-              TextField(
-                controller: _uidController,
-                decoration: InputDecoration(labelText: 'ID'),
-              ),
-              TextField(
-                controller: _pwController,
-                decoration: InputDecoration(labelText: 'Password'),
-                obscureText: true,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              ElevatedButton(
-                onPressed: _login,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xffffadb6),
-                ),
-                child: const Text('Login'),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              TextButton(
-                onPressed: () {},
-                style: TextButton.styleFrom(
-                  foregroundColor: Colors.black87,
-                ),
-                child: const Text('Sign In'),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-            ],
+            ),
           ),
         ),
       ),
