@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:get/get.dart';
 import 'team_add_page.dart';
+import '../meta_data.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -22,8 +23,13 @@ class SettingAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: true,
-      backgroundColor: Color(0xffffadb6),
-      title: Text('settings ⚙️'),
+      backgroundColor: Color(pColor),
+      title: const Text(
+        'settings ⚙️',
+        style: TextStyle(
+          color: Colors.black87,
+        ),
+      ),
     );
   }
 
@@ -40,7 +46,7 @@ class SettingBody extends StatelessWidget {
       content: const Text('⚒️ 서비스 준비 중입니다. ⚒️'),
       textCancel: '취소',
       onCancel: Get.back,
-      buttonColor: Color(0xffffadb6),
+      buttonColor: Color(pColor),
       cancelTextColor: Colors.black,
     );
   }
