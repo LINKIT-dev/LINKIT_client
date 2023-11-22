@@ -1,15 +1,15 @@
 {
-  "team_num": 1,
+  "team_num": 2,
   "lst": [
     {
       "team_name": "Team A",
       "logo_image": "logo_url_a",
-      "tags": ["tag1", "tag2"]
+      "tags": ["tag1", "tag2", "tag3"]
     },
     {
       "team_name": "Team B",
       "logo_image": "logo_url_b",
-      "tags": ["tag3", "tag4"]
+      "tags": ["tag4", "tag5", "tag6"]
     }
   ]
 }

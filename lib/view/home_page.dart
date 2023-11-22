@@ -4,15 +4,42 @@ import 'figures.dart';
 import 'profile.dart';
 import 'workspace.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
+import '../controller/teamspace_controller.dart';
+import '../controller/BottomNavigator.dart';
+import 'tag_page.dart';
+import 'notice_page.dart';
+import 'setting_page.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   const Home({super.key});
 
+  static List<Widget> tabPages = <Widget>[
+    MainPage(),
+    TagPage(),
+    NoticePage(),
+    SettingPage(),
+  ];
+
   @override
-  State<Home> createState() => _HomeState();
+  Widget build(BuildContext context) {
+    Get.put(BottomNavgationBarController());
+
+    return Scaffold(
+      body: Obx(
+          () => tabPages[BottomNavgationBarController.to.selectedIndex.value]),
+      bottomNavigationBar: BottomNavgationBarView(),
+    );
+  }
 }
 
-class _HomeState extends State<Home> {
+class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -25,10 +52,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomeAppBar(),
-      extendBodyBehindAppBar: true,
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
               "assets/image/linkit_bg.png",
@@ -62,15 +87,7 @@ class _HomeState extends State<Home> {
                   controller: _scrollController,
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: [
-                      Workspace(),
-                      Workspace(),
-                      Workspace(),
-                      Workspace(),
-                      Workspace(),
-                      Workspace(),
-                      Workspace(),
-                    ],
+                    children: _Workspace(),
                   ),
                 ),
               ),
@@ -80,37 +97,6 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-}
-
-class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const HomeAppBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      leading: const Icon(
-        Icons.menu,
-        color: Colors.black87,
-        size: 30,
-      ),
-      centerTitle: true,
-      backgroundColor: Colors.transparent,
-      elevation: 0.0,
-      actions: const [
-        Icon(
-          Icons.notifications,
-          color: Colors.black87,
-          size: 30,
-        ),
-        SizedBox(
-          width: 18,
-        ),
-      ],
-    );
-  }
-
-  @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight); // AppBar의 높이 설정
 }
 
 class SearchContainer extends StatelessWidget {
@@ -142,5 +128,47 @@ class SearchContainer extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+List<Widget> _Workspace() {
+  final TeamSpaceController teamspaceController =
+      Get.put(TeamSpaceController());
+
+  List<Widget> widgets = [];
+  int teamCount = teamspaceController.ts.value.teams.length;
+  print(teamspaceController.ts.value.teams);
+
+  if (teamCount == 0) {
+    widgets.add(
+      Container(
+        padding: EdgeInsets.only(top: 30),
+        child: CircleAvatar(
+          backgroundColor: Color(0xffffadb6), // 원하는 배경색 설정
+          radius: 30, // 원의 반지름 조정으로 크기 조절
+          child: IconButton(
+            icon: Icon(Icons.add),
+            iconSize: 30, // 아이콘 크기 조정
+            color: Colors.white, // 아이콘 색상 설정
+            onPressed: () {
+              // 버튼 클릭 시 실행할 동작
+            },
+          ),
+        ),
+      ),
+    );
+    return widgets;
+  } else {
+    for (int i = 0; i < teamCount; i++) {
+      var team = teamspaceController.ts.value.teams[i];
+      widgets.add(Obx(() => Workspace(
+            name: team.teamName,
+            tags: team.tags,
+            colors: team.colors, // 여기에 적절한 값이 필요
+            image: team.logoImage, // 여기에 적절한 값이 필요
+          )));
+    }
+
+    return widgets;
   }
 }

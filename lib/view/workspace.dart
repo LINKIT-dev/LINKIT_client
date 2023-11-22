@@ -3,7 +3,28 @@ import 'package:get/get.dart';
 import 'detail_page.dart';
 
 class Workspace extends StatelessWidget {
-  const Workspace({super.key});
+  Workspace(
+      {super.key,
+      required this.name,
+      required this.tags,
+      required this.colors,
+      required this.image});
+
+  final List<String> tags;
+  final List<String> colors;
+  final String name;
+  final String image;
+
+  List<Color> convertHexToColor(List<String> hexColors) {
+    return hexColors.map((hex) {
+      final buffer = StringBuffer();
+      if (hex.length == 6 || hex.length == 7) buffer.write('ff');
+      buffer.write(hex.replaceFirst('#', ''));
+      return Color(int.parse(buffer.toString(), radix: 16));
+    }).toList();
+  }
+
+  late List<Color> hexcolors = convertHexToColor(colors);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +41,7 @@ class Workspace extends StatelessWidget {
             Container(
               width: 240,
               height: 160,
-              margin: EdgeInsets.only(top: 20),
+              margin: EdgeInsets.only(top: 20, bottom: 20),
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 2.5,
@@ -30,158 +51,28 @@ class Workspace extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.only(right: 15, top: 20),
+                    padding: EdgeInsets.only(left: 15, top: 45),
                     child: Align(
-                      alignment: Alignment.topRight,
+                      alignment: Alignment.topLeft,
                       child: Text(
-                        "PROJECT1",
+                        name,
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 30,
                           fontFamily: 'JalnanGothic',
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
-                  Container(
-                    padding: EdgeInsets.only(right: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        CircleAvatar(
-                          radius: 20,
-                          backgroundColor: Colors.black87, // 태두리 색상
-                          child: CircleAvatar(
-                            radius: 19,
-                            backgroundImage:
-                                AssetImage("assets/image/asset2.png"),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        CircleAvatar(
-                          radius: 20, // 원래의 radius + border의 절반
-                          backgroundColor: Colors.black87, // 태두리 색상
-                          child: CircleAvatar(
-                            radius: 19,
-                            backgroundImage:
-                                AssetImage("assets/image/asset3.png"),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        CircleAvatar(
-                          radius: 20, // 원래의 radius + border의 절반
-                          backgroundColor: Colors.black87, // 태두리 색상
-                          child: CircleAvatar(
-                            radius: 19,
-                            backgroundImage:
-                                AssetImage("assets/image/asset4.png"),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        CircleAvatar(
-                          radius: 20, // 원래의 radius + border의 절반
-                          backgroundColor: Colors.black87, // 태두리 색상
-                          child: CircleAvatar(
-                            radius: 19,
-                            backgroundImage:
-                                AssetImage("assets/image/asset5.jpeg"),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            // 버튼이 눌렸을 때 실행할 코드
-                          },
-                          child: Text(
-                            "#spring",
-                            style: TextStyle(
-                              color: Colors.black87, // 텍스트 색상 설정
-                              fontSize: 12, // 텍스트 글꼴 크기를 줄입니다.
-                            ),
-                          ),
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 4),
-                            // 패딩을 줄입니다.
-                            backgroundColor: Colors.lightGreen,
-                            // 배경 색상 설정
-                            primary: Colors.black87,
-                            // 텍스트 색상 설정
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(20), // 모서리의 둥근 정도를 설정
-                            ),
-                            minimumSize: Size(5, 5), // 버튼의 최소 크기를 설정할 수 있습니다.
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            // 버튼이 눌렸을 때 실행할 코드
-                          },
-                          child: Text(
-                            "#flutter",
-                            style: TextStyle(
-                              color: Colors.black87, // 텍스트 색상 설정
-                              fontSize: 12, // 텍스트 글꼴 크기를 줄입니다.
-                            ),
-                          ),
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 4),
-                            // 패딩을 줄입니다.
-                            backgroundColor: Colors.blueAccent,
-                            // 배경 색상 설정
-                            primary: Colors.black87,
-                            // 텍스트 색상 설정
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(20), // 모서리의 둥근 정도를 설정
-                            ),
-                            minimumSize: Size(5, 5), // 버튼의 최소 크기를 설정할 수 있습니다.
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            // 버튼이 눌렸을 때 실행할 코드
-                          },
-                          child: Text(
-                            "#figma",
-                            style: TextStyle(
-                              color: Colors.black87, // 텍스트 색상 설정
-                              fontSize: 12, // 텍스트 글꼴 크기를 줄입니다.
-                            ),
-                          ),
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 4),
-                            // 패딩을 줄입니다.
-                            backgroundColor: Colors.orange,
-                            // 배경 색상 설정
-                            primary: Colors.black87,
-                            // 텍스트 색상 설정
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(20), // 모서리의 둥근 정도를 설정
-                            ),
-                            minimumSize: Size(5, 5), // 버튼의 최소 크기를 설정할 수 있습니다.
-                          ),
-                        ),
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      TagButton(text: tags[0], color: hexcolors[0]),
+                      TagButton(text: tags[1], color: hexcolors[1]),
+                      TagButton(text: tags[2], color: hexcolors[2]),
+                    ],
                   ),
                 ],
               ),
@@ -194,12 +85,44 @@ class Workspace extends StatelessWidget {
                 backgroundColor: Colors.black87, // 태두리 색상
                 child: CircleAvatar(
                   radius: 29,
-                  backgroundImage: AssetImage("assets/image/asset1.jpeg"),
+                  backgroundImage: NetworkImage(image),
                 ),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class TagButton extends StatelessWidget {
+  const TagButton({super.key, required this.text, required this.color});
+
+  final String text;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        // 버튼이 눌렸을 때 실행할 코드
+      },
+      child: Text(
+        "#${text}",
+        style: TextStyle(
+          color: Colors.black87,
+          fontSize: 12,
+        ),
+      ),
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        backgroundColor: color,
+        primary: Colors.black87,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        minimumSize: Size(5, 5),
       ),
     );
   }
