@@ -15,21 +15,10 @@ class Workspace extends StatelessWidget {
   final String name;
   final String image;
 
-  List<Color> convertHexToColor(List<String> hexColors) {
-    return hexColors.map((hex) {
-      final buffer = StringBuffer();
-      if (hex.length == 6 || hex.length == 7) buffer.write('ff');
-      buffer.write(hex.replaceFirst('#', ''));
-      return Color(int.parse(buffer.toString(), radix: 16));
-    }).toList();
-  }
-
-  late List<Color> hexcolors = convertHexToColor(colors);
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
       width: 240,
       height: 200,
       child: GestureDetector(
@@ -41,7 +30,7 @@ class Workspace extends StatelessWidget {
             Container(
               width: 240,
               height: 160,
-              margin: EdgeInsets.only(top: 20, bottom: 20),
+              margin: const EdgeInsets.only(top: 20, bottom: 20),
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 2.5,
@@ -51,27 +40,36 @@ class Workspace extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.only(left: 15, top: 45),
+                    padding: const EdgeInsets.only(left: 15, top: 45),
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: Text(
                         name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 30,
                           fontFamily: 'JalnanGothic',
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      TagButton(text: tags[0], color: hexcolors[0]),
-                      TagButton(text: tags[1], color: hexcolors[1]),
-                      TagButton(text: tags[2], color: hexcolors[2]),
+                      TagButton(
+                          text: tags[0],
+                          color: Color(
+                              int.parse(colors[0].substring(2), radix: 16))),
+                      TagButton(
+                          text: tags[1],
+                          color: Color(
+                              int.parse(colors[1].substring(2), radix: 16))),
+                      TagButton(
+                          text: tags[2],
+                          color: Color(
+                              int.parse(colors[2].substring(2), radix: 16))),
                     ],
                   ),
                 ],
@@ -108,21 +106,20 @@ class TagButton extends StatelessWidget {
       onPressed: () {
         // 버튼이 눌렸을 때 실행할 코드
       },
-      child: Text(
-        "#${text}",
-        style: TextStyle(
-          color: Colors.black87,
-          fontSize: 12,
-        ),
-      ),
       style: TextButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         backgroundColor: color,
-        primary: Colors.black87,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        minimumSize: Size(5, 5),
+        minimumSize: const Size(5, 5),
+      ),
+      child: Text(
+        "#$text",
+        style: const TextStyle(
+          color: Colors.black87,
+          fontSize: 12,
+        ),
       ),
     );
   }

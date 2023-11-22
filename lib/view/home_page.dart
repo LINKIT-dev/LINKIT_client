@@ -20,7 +20,6 @@ class Home extends StatelessWidget {
   static List<Widget> tabPages = <Widget>[
     MainPage(),
     TagPage(),
-    NoticePage(),
     SettingPage(),
   ];
 
@@ -56,8 +55,6 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    //var profile = _profileController.pm.value;
-
     return Scaffold(
       body: Obx(() => (Container(
             decoration: BoxDecoration(
@@ -175,7 +172,8 @@ List<Widget> _Workspace() {
       wd.add(Workspace(
         name: team?.teamName ?? 'Invalid Team',
         tags: team?.tags ?? ['tag1', 'tag2', 'tag3'],
-        colors: team?.colors ?? [], // 여기에 적절한 값이 필요
+        colors: team?.colors ??
+            ['0xffffdddd', '0xffffe5dd', '0xffffeedd'], // 여기에 적절한 값이 필요
         image: team?.logoImage ?? '', // 여기에 적절한 값이 필요
       ));
     }

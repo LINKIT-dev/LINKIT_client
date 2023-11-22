@@ -28,17 +28,15 @@ class _ProfileContainerState extends State<ProfileContainer> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              const SizedBox(
+                height: 20,
+              ),
               Text(
                 "HELLO,\n${widget.profile.name}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 25,
                   fontFamily: 'jalnanGothic',
                 ),
-              ),
-              SizedBox(height: 5),
-              Text(
-                widget.profile.email,
-                style: TextStyle(fontSize: 12),
               ),
             ],
           ),

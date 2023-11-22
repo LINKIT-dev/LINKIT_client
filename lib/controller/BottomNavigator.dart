@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import '../meta_data.dart';
 
 // BottomNavigationBar 상태 관리를 위한 GetX controller
 class BottomNavgationBarController extends GetxController {
@@ -29,11 +30,11 @@ class BottomNavgationBarView extends GetView<BottomNavgationBarController> {
           selectedItemColor: context.theme.colorScheme.onBackground,
           unselectedItemColor: context.theme.colorScheme.onSurfaceVariant,
           // 선택에 따라 label text style 변경
-          unselectedLabelStyle: TextStyle(fontSize: 10),
-          selectedLabelStyle: TextStyle(fontSize: 10),
+          unselectedLabelStyle: const TextStyle(fontSize: 10),
+          selectedLabelStyle: const TextStyle(fontSize: 10),
           // 탭 애니메이션 변경 (fixed: 없음)
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Color(0xffffadb6),
+          backgroundColor: Color(pColor),
           // Bar에 보여질 요소. icon과 label로 구성.
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -43,10 +44,6 @@ class BottomNavgationBarView extends GetView<BottomNavgationBarController> {
             BottomNavigationBarItem(
               icon: Icon(Icons.tag),
               label: 'Tag',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.notifications),
-              label: 'Notice',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
