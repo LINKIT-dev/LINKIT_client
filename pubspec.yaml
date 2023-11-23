@@ -31,12 +31,15 @@ dependencies:
   flutter:
     sdk: flutter
   get:
-  vs_scrollbar: ^1.0.0
-  http: ^1.1.0
+  vs_scrollbar:
+  http:
   settings_ui:
-  dio: ^5.3.4
+  dio:
   html:
   url_launcher:
+  jwt_decode:
+  flutter_secure_storage :
+
 
 
   # The following adds the Cupertino Icons font to your application.

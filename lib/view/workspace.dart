@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:linkit_client/view/tag.dart';
 import 'team_page.dart';
+import '../meta_data.dart';
 import 'tag_page.dart';
-import 'tag_detail_page.dart';
 
 class Workspace extends StatelessWidget {
   Workspace(
@@ -21,7 +21,7 @@ class Workspace extends StatelessWidget {
       height: 200,
       child: GestureDetector(
         onTap: () {
-          Get.to(() => team_space(), arguments: [name, image]);
+          Get.to(() => team_space(), arguments: [name,image]);
         },
         child: Stack(
           children: [
@@ -56,9 +56,7 @@ class Workspace extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      TagButton(
-                        text: tags[0],
-                      ),
+                      TagButton(text: tags[0]),
                       TagButton(
                         text: tags[1],
                       ),
@@ -98,7 +96,7 @@ class TagButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        Get.to(() => TagDetailPage(), arguments: text);
+        // 버튼이 눌렸을 때 실행할 코드
       },
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

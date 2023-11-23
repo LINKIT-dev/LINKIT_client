@@ -9,7 +9,7 @@ import 'copylink.dart';
 
 class OthChatForm extends StatefulWidget {
   final UserLikeModel like;
-  final ChatModel post; // PostModel 객체를 저장하기 위한 변수
+  final Links? post; // PostModel 객체를 저장하기 위한 변수
 
   const OthChatForm({Key? key, required this.post, required this.like})
       : super(key: key);
@@ -40,11 +40,15 @@ class _OthChatFormState extends State<OthChatForm> {
               const SizedBox(width: 10),
               IconButton(
                 onPressed: () {},
-                icon: Image.network(widget.post.user_imageUrl),
+                icon: widget.post != null && widget.post!.userVO != null && widget.post!.userVO!.uid != null
+                    ? Image.network(widget.post!.userVO!.profileImg!)
+                    : Icon(Icons.error),
               ),
               const SizedBox(width: 5),
               Text(
-                widget.post.username,
+                widget.post != null && widget.post!.userVO != null && widget.post!.userVO!.uid != null?
+                widget.post!.userVO!.uid!
+                :"UsrrName error",
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
@@ -56,13 +60,12 @@ class _OthChatFormState extends State<OthChatForm> {
           const SizedBox(height: 10),
           GestureDetector(
             onTap: () {
-              showPost(
-                  context,
-                  widget.post.imageUrl,
-                  widget.post.title,
-                  widget.post.description,
-                  widget.post.url,
-                  widget.post.tags);
+              showPost(context,
+                widget.post!.linkPreviewImg, // '!' 연산자로 null이 아님을 보증
+                widget.post!.title,
+                widget.post!.content,
+                widget.post!.url,
+                widget.post!.tags,);
             },
             child: Container(
               margin: const EdgeInsets.only(left: 15),
@@ -89,12 +92,12 @@ class _OthChatFormState extends State<OthChatForm> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(width: screenSize.width * 0.03),
-                  Image.network(
-                    widget.post.imageUrl,
-                    width: 100,
+                  widget.post != null
+                      ? Image.network(widget.post!.linkPreviewImg!,width: 100,
                     height: 100,
-                    fit: BoxFit.contain,
-                  ),
+                    fit: BoxFit.contain,)
+                      : Image.network("https://i.ibb.co/V9rV08m/logo-003.jpg"),
+
                   SizedBox(width: screenSize.width * 0.03),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +107,7 @@ class _OthChatFormState extends State<OthChatForm> {
                         height: 30,
                         width: screenSize.width * 0.49,
                         child: Text(
-                          '[ ${widget.post.title} ]',
+                          '[ ${widget.post!.title} ]',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -120,7 +123,7 @@ class _OthChatFormState extends State<OthChatForm> {
                         height: 40,
                         width: screenSize.width * 0.49,
                         child: Text(
-                          widget.post.description,
+                          widget.post!.content!,
                           style: TextStyle(
                             fontSize: 15,
                             color: Colors.grey[800],
@@ -161,10 +164,10 @@ class _OthChatFormState extends State<OthChatForm> {
                             ),
                             IconButton(
                               onPressed: () {
-                                CopyLink(widget.post.url);
+                                CopyLink(widget.post!.url!);
                                 Get.snackbar(
                                   '자유롭게 링크를 공유하세요!!',
-                                  '클립보드에 ${widget.post.url} 복사됨',
+                                  '클립보드에 ${widget.post!.url} 복사됨',
                                   snackPosition: SnackPosition.BOTTOM,
                                   forwardAnimationCurve: Curves.elasticInOut,
                                   reverseAnimationCurve: Curves.easeOut,
@@ -193,7 +196,7 @@ class _OthChatFormState extends State<OthChatForm> {
 
 class UsrChatForm extends StatefulWidget {
   final UserLikeModel like;
-  final ChatModel post; // PostModel 객체를 저장하기 위한 변수
+  final Links? post; // PostModel 객체를 저장하기 위한 변수
 
   const UsrChatForm({Key? key, required this.post, required this.like})
       : super(key: key);
@@ -219,13 +222,16 @@ class _UsrChatFormState extends State<UsrChatForm> {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              showPost(
+              if (widget.post != null) {
+                showPost(
                   context,
-                  widget.post.imageUrl,
-                  widget.post.title,
-                  widget.post.description,
-                  widget.post.url,
-                  widget.post.tags);
+                  widget.post!.linkPreviewImg, // '!' 연산자로 null이 아님을 보증
+                  widget.post!.title,
+                  widget.post!.content,
+                  widget.post!.url,
+                  widget.post!.tags,
+                );
+              }
             },
             child: Container(
               margin: const EdgeInsets.only(left: 15),
@@ -253,7 +259,7 @@ class _UsrChatFormState extends State<UsrChatForm> {
                 children: <Widget>[
                   SizedBox(width: screenSize.width * 0.03),
                   Image.network(
-                    widget.post.imageUrl,
+                    widget.post!.userVO!.profileImg!,
                     width: 100,
                     height: 100,
                     fit: BoxFit.contain,
@@ -269,7 +275,7 @@ class _UsrChatFormState extends State<UsrChatForm> {
                             height: 30,
                             width: screenSize.width * 0.40,
                             child: Text(
-                              '[ ${widget.post.title} ]',
+                              '[ ${widget.post!.title!} ]',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -314,7 +320,7 @@ class _UsrChatFormState extends State<UsrChatForm> {
                         height: 40,
                         width: screenSize.width * 0.49,
                         child: Text(
-                          widget.post.description,
+                          widget.post!.content!,
                           style: TextStyle(
                             fontSize: 15,
                             color: Colors.grey[800],
@@ -355,10 +361,10 @@ class _UsrChatFormState extends State<UsrChatForm> {
                             ),
                             IconButton(
                               onPressed: () {
-                                CopyLink(widget.post.url);
+                                CopyLink(widget.post!.url!);
                                 Get.snackbar(
                                   '자유롭게 링크를 공유하세요!!',
-                                  '클립보드에 ${widget.post.url} 복사됨',
+                                  '클립보드에 ${widget.post!.url!} 복사됨',
                                   snackPosition: SnackPosition.BOTTOM,
                                   forwardAnimationCurve: Curves.elasticInOut,
                                   reverseAnimationCurve: Curves.easeOut,
