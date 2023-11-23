@@ -1,0 +1,24 @@
+{
+  "hashtags": [
+    {
+      "hashtagId": 0,
+      "hashtagName": "string"
+    },
+    {
+      "hashtagId": 1,
+      "hashtagName": "example"
+    },
+    {
+      "hashtagId": 2,
+      "hashtagName": "flutter"
+    },
+    {
+      "hashtagId": 3,
+      "hashtagName": "getx"
+    },
+    {
+      "hashtagId": 4,
+      "hashtagName": "programming"
+    }
+  ]
+}

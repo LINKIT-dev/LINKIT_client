@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../view/like_page.dart';
 import 'package:get/get.dart';
 import '../view/chat.dart';
 import '../controller/chat_controller.dart';
@@ -15,6 +14,8 @@ class TagDetailPage extends StatefulWidget {
 class _TagPageState extends State<TagDetailPage> {
   final ChatController chatController = Get.put(ChatController());
   final UserLikeController userlikeController = Get.put(UserLikeController());
+
+  final String? tag = Get.arguments ?? '';
 
   @override
   Widget build(BuildContext context) {
@@ -39,16 +40,12 @@ class _TagPageState extends State<TagDetailPage> {
           ),
           title: Container(
             padding: EdgeInsets.only(top: 16),
-            child: const Row(
+            child: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                CircleAvatar(
-                  backgroundImage: AssetImage('assets/image/user.png'),
-                ),
-                SizedBox(width: 8), // 프로필 사진과 텍스트 사이의 간격
                 Text(
-                  'Oss Project',
-                  style: TextStyle(
+                  "#${tag!}",
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
                   ),
@@ -56,38 +53,7 @@ class _TagPageState extends State<TagDetailPage> {
               ],
             ),
           ),
-          centerTitle: false,
-          actions: <Widget>[
-            Container(
-              padding: const EdgeInsets.only(top: 16),
-              child: IconButton(
-                icon: const Icon(Icons.favorite_outline,
-                    color: Color(0xff9a6a9a)),
-                onPressed: () {
-                  // 메뉴 버튼 동작
-                  Get.to(() => like_space());
-                },
-              ),
-            ),
-            /* Container(
-              padding: const EdgeInsets.only(top: 16),
-              child: IconButton(
-                icon: const Icon(Icons.search),
-                onPressed: () {
-                  // 검색 버튼 동작
-                },
-              ),
-            ),*/
-          ],
-          leading: Container(
-            padding: const EdgeInsets.only(top: 16),
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                Get.back();
-              },
-            ),
-          ),
+          centerTitle: true,
         ),
       ),
       body: Column(
@@ -106,13 +72,13 @@ class _TagPageState extends State<TagDetailPage> {
                       children: [
                         chatController.Posts[index].username == 'Eunjin'
                             ? UsrChatForm(
-                          post: chatController.Posts[index],
-                          like: userlikeController.Likes[index],
-                        )
+                                post: chatController.Posts[index],
+                                like: userlikeController.Likes[index],
+                              )
                             : OthChatForm(
-                          post: chatController.Posts[index],
-                          like: userlikeController.Likes[index],
-                        ),
+                                post: chatController.Posts[index],
+                                like: userlikeController.Likes[index],
+                              ),
                       ],
                     );
                   },
