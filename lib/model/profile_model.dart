@@ -1,18 +1,16 @@
 class ProfileModel {
-  String? uid;
-  String? profileImg;
+  String name;
+  String profile_image;
 
-  ProfileModel({this.uid, this.profileImg});
+  ProfileModel({
+    this.name = '',
+    this.profile_image = '',
+  });
 
-  ProfileModel.fromJson(Map<String, dynamic> json) {
-    uid = json['uid'];
-    profileImg = json['profileImg'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['uid'] = this.uid;
-    data['profileImg'] = this.profileImg;
-    return data;
+  factory ProfileModel.fromJson(Map<String, dynamic> json) {
+    return ProfileModel(
+      name: json['name'],
+      profile_image: json['profile_image'],
+    );
   }
 }
