@@ -5,7 +5,7 @@ class TeamSpaceModel {
   TeamSpaceModel({this.teamNum, this.teams});
 
   TeamSpaceModel.fromJson(Map<String, dynamic> json) {
-    teamNum = int.tryParse(json['team_num']) ?? 0;
+    teamNum = int.tryParse(json['totalTeamCount']) ?? 0;
     if (json['teams'] != null) {
       teams = <TeamModel>[];
       json['teams'].forEach((v) {
@@ -16,7 +16,7 @@ class TeamSpaceModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['team_num'] = this.teamNum;
+    data['totalTeamCount'] = this.teamNum;
     if (this.teams != null) {
       data['teams'] = this.teams!.map((v) => v.toJson()).toList();
     }
@@ -32,16 +32,16 @@ class TeamModel {
   TeamModel({this.teamName, this.logoImage, this.tags});
 
   TeamModel.fromJson(Map<String, dynamic> json) {
-    teamName = json['team_name'];
-    logoImage = json['logo_image'];
-    tags = json['tags'].cast<String>();
+    teamName = json['name'];
+    logoImage = json['profileImg'];
+    tags = json['top3Hashtags'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['team_name'] = this.teamName;
-    data['logo_image'] = this.logoImage;
-    data['tags'] = this.tags;
+    data['name'] = this.teamName;
+    data['profileImg'] = this.logoImage;
+    data['top3Hashtags'] = this.tags;
     return data;
   }
 }

@@ -17,7 +17,7 @@ class ProfileController extends GetxController {
     dio.options.baseUrl = URL;
 
     try {
-      final response = await dio.get('user/my/profile'); // 서버 엔드포인트로 수정
+      final response = await dio.get('/user/my/profile'); // 서버 엔드포인트
       if (response.statusCode == 200) {
         pm.value = ProfileModel.fromJson(response.data);
       } else {
