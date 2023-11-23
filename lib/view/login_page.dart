@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import '../model/login_model.dart';
+import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,7 +14,6 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _uidController = TextEditingController();
   final TextEditingController _pwController = TextEditingController();
 
-
   void showErrorDialog() {
     Get.defaultDialog(
       title: '오류',
@@ -24,7 +23,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-
   void _login() async {
     String email = _uidController.text;
     String password = _pwController.text;
@@ -33,6 +31,7 @@ class _LoginPageState extends State<LoginPage> {
     bool isLoggedIn = await authService.login(email, password);
 
     if (isLoggedIn) {
+      Get.off(() => Home());
     } else {
       showErrorDialog();
     }
@@ -56,7 +55,9 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 100,),
+                  SizedBox(
+                    height: 100,
+                  ),
                   SizedBox(
                     height: 400,
                     width: 400,

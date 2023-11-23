@@ -204,7 +204,6 @@ class _LinkAddState extends State<LinkAdd> {
                             const SizedBox(height: 20),
                             ElevatedButton(
                               onPressed: () {
-
                                 // 필드 검사
                                 if (_urlController.text.isEmpty) {
                                   // url 필드가 비었을 때
