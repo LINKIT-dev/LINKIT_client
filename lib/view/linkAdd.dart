@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
 import '../view/alert.dart';
+import '../model/addlink_model.dart';
 
 final TextEditingController _urlController = TextEditingController();
 final TextEditingController _titleController = TextEditingController();
@@ -204,6 +205,7 @@ class _LinkAddState extends State<LinkAdd> {
                             const SizedBox(height: 20),
                             ElevatedButton(
                               onPressed: () {
+                                AddLink addlink = AddLink();
                                 // 필드 검사
                                 if (_urlController.text.isEmpty) {
                                   // url 필드가 비었을 때
@@ -238,6 +240,15 @@ class _LinkAddState extends State<LinkAdd> {
                                 } else {
                                   // 모든 필드가 채워져 있다면 필드를 비우고 모달을 닫기
                                   // addChatWidget();
+                                  List<String> tagList =
+                                      _tagController.text.split(',');
+                                  addlink.addLink(
+                                      _urlController.text,
+                                      _titleController.text,
+                                      _descriptionController.text,
+                                      _imageController.text,
+                                      1,
+                                      tagList);
                                   CloseModal();
                                   Navigator.pop(context);
                                 }

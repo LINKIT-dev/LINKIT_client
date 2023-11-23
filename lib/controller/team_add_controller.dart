@@ -3,7 +3,6 @@ import '../model/team_add_model.dart'; // 모델 클래스 경로 확인
 import '../meta_data.dart';
 
 Future<void> sendTeamSpaceData(TeamSpaceAddModel teamSpaceAddModel) async {
-  Dio dio = Dio();
 
   // Dio 기본 설정 추가
   dio.options.baseUrl = URL;
