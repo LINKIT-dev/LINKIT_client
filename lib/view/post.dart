@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../view/copylink.dart';
 import '../view/tag.dart';
+import 'tag_detail_page.dart';
 
-void showPost(BuildContext context, String? image_url, String? title,
-    String? description, String? _url, List<String>? tags) {
+void showPost(BuildContext context, String image_url, String title,
+    String description, String _url, List<String> tags) {
   // List<String> tags = tag.split(',');
 
   showModalBottomSheet(
@@ -39,7 +40,7 @@ void showPost(BuildContext context, String? image_url, String? title,
                   ),
                   IconButton(
                     onPressed: () {
-                      CopyLink(_url!);
+                      CopyLink(_url);
                       Get.snackbar(
                         '자유롭게 링크를 공유하세요!!',
                         '클립보드에 ${_url} 복사됨',
@@ -55,7 +56,7 @@ void showPost(BuildContext context, String? image_url, String? title,
                     height: 20,
                   ),
                   SizedBox(
-                    child: Text(title!,
+                    child: Text(title,
                         style: const TextStyle(
                           fontSize: 38,
                           fontWeight: FontWeight.w500,
@@ -72,7 +73,7 @@ void showPost(BuildContext context, String? image_url, String? title,
                       child: IconButton(
                         onPressed: () async {
                           final url = Uri.parse(
-                            _url!,
+                            _url,
                           );
                           if (await canLaunchUrl(url)) {
                             launchUrl(url);
@@ -81,7 +82,7 @@ void showPost(BuildContext context, String? image_url, String? title,
                             print("Can't launch $url");
                           }
                         },
-                        icon: Image.network(image_url!),
+                        icon: Image.network(image_url),
                       ),
                     ),
                   ),
@@ -91,9 +92,10 @@ void showPost(BuildContext context, String? image_url, String? title,
                   Wrap(
                     spacing: 8.0, // 태그 사이의 가로 간격
                     runSpacing: 4.0, // 태그 사이의 세로 간격
-                    children: tags!.map((tag) => ElevatedButton(
+                    children: tags
+                        .map((tag) => ElevatedButton(
                               onPressed: () {
-                                // 태그 버튼 클릭 시 동작
+                                Get.to(() => TagDetailPage(), arguments: tag);
                               },
                               style: ButtonStyle(
                                 backgroundColor:
@@ -120,7 +122,7 @@ void showPost(BuildContext context, String? image_url, String? title,
                     height: 400,
                     width: 400,
                     child: Text(
-                      description!,
+                      description,
                       style: const TextStyle(
                         fontSize: 25,
                       ),

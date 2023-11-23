@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:linkit_client/model/tag_model.dart';
 import 'package:linkit_client/view/tag_detail_page.dart';
-import '../meta_data.dart';
+import '../meta_data.dart'; // 이 파일에 dColor와 pColor를 정의하세요
 import 'tag_detail_page.dart';
+import '../controller/tag_controller.dart';
 
 class TagPage extends StatefulWidget {
   const TagPage({super.key});
@@ -12,57 +14,45 @@ class TagPage extends StatefulWidget {
 }
 
 class _TagPageState extends State<TagPage> {
-  final List<String> tags = [
-    "태그1",
-    "태그2",
-    "태그3",
-    "태그3",
-    "태그3",
-    "태그3",
-    "태그3",
-    "태그3",
-    "태그3",
-    "태그3",
-    "태그3",
-    "태그3",
-    "태그3",
-    "태그3",
-    "태그3",
-    // ... 여기에 더 많은 태그들을 추가할 수 있습니다.
-  ];
+  final TagController tagController = Get.put(TagController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const TagAppBar(),
-      body: GridView.builder(
-        padding: const EdgeInsets.all(10),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, // 두 열로 표시
-          crossAxisSpacing: 10, // 열 사이의 간격
-          mainAxisSpacing: 10, // 행 사이의 간격
-        ),
-        itemCount: tags.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Get.to(() => TagDetailPage());
-            },
-            child: Card(
-              child: Center(
-                child: Text(
-                  tags[index],
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+      body: Obx(() {
+        return GridView.builder(
+          padding: const EdgeInsets.all(10),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+          ),
+          itemCount:
+              tagController.tags.length, // tagController의 tags 리스트를 사용합니다.
+          itemBuilder: (context, index) {
+            final hashtag = tagController.tags[index].hashtagName;
+            return GestureDetector(
+              onTap: () {
+                Get.to(() => TagDetailPage(),
+                    arguments: hashtag); // 해시태그 이름을 인자로 전달합니다.
+              },
+              child: Card(
+                child: Center(
+                  child: Text(
+                    hashtag!,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
+                color: Color(dColor), // 적절한 색상 코드로 교체하세요.
               ),
-              color: Color(dColor),
-            ),
-          );
-        },
-      ),
+            );
+          },
+        );
+      }),
     );
   }
 }
@@ -74,7 +64,7 @@ class TagAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: true,
-      backgroundColor: Color(pColor),
+      backgroundColor: Color(pColor), // 적절한 색상 코드로 교체하세요.
       title: const Text(
         'Tag 🏷️',
         style: TextStyle(
@@ -85,5 +75,5 @@ class TagAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
