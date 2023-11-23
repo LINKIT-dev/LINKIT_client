@@ -6,7 +6,6 @@ import '../model/profile_model.dart';
 class ProfileContainer extends StatefulWidget {
   const ProfileContainer({super.key});
 
-
   @override
   State<ProfileContainer> createState() => _ProfileContainerState();
 }
@@ -52,4 +51,3 @@ class _ProfileContainerState extends State<ProfileContainer> {
     );
   }
 }
-

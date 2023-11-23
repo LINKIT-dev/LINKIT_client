@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controller/profile_controller.dart';
 import '../controller/userlike_controller.dart';
 import '../view/team_page.dart';
 import '../view/chat.dart';
@@ -16,7 +15,6 @@ class like_space extends StatefulWidget {
 class _like_spaceState extends State<like_space> {
   final ChatController chatController = Get.put(ChatController());
   final UserLikeController userlikeController = Get.put(UserLikeController());
-  final ProfileController _profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -72,24 +70,20 @@ class _like_spaceState extends State<like_space> {
           radius: const Radius.circular(10),
           child: Obx(() {
             return ListView.builder(
-              itemCount: chatController.Posts.value.totalLinkCount,
+              itemCount: chatController.Posts.length,
               itemBuilder: (context, index) {
-                final linkItem = chatController.Posts.value.links?[index];
-                final isCurrentUser = linkItem?.userVO?.uid ==
-                    _profileController.pm.value.uid;
                 return Column(
                   children: [
-                    isCurrentUser
-                        ? UsrChatForm(
-                      post: linkItem,
-                      like: userlikeController
-                          .Likes[index], // 여기서 필요한 like 정보를 적절히 전달
-                    )
-                        : OthChatForm(
-                      post: linkItem,
-                      like: userlikeController
-                          .Likes[index], // 여기서 필요한 like 정보를 적절히 전달
-                    )
+                    if (userlikeController.Likes[index].user_like)
+                      chatController.Posts[index].username == 'Eunjin'
+                          ? UsrChatForm(
+                              post: chatController.Posts[index],
+                              like: userlikeController.Likes[index],
+                            )
+                          : OthChatForm(
+                              post: chatController.Posts[index],
+                              like: userlikeController.Likes[index],
+                            ),
                   ],
                 );
               },
