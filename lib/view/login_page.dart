@@ -24,11 +24,11 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _login() async {
-    String email = _uidController.text;
+    String uid = _uidController.text;
     String password = _pwController.text;
 
     AuthService authService = AuthService();
-    bool isLoggedIn = await authService.login(email, password);
+    bool isLoggedIn = await authService.login(uid, password);
 
     if (isLoggedIn) {
       Get.off(() => Home());

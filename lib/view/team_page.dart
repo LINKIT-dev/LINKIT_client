@@ -47,7 +47,7 @@ class _team_spaceState extends State<team_space> {
             ),
           ),
           title: Container(
-            padding: EdgeInsets.only(top: 16),
+            padding: const EdgeInsets.only(top: 16),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -59,10 +59,10 @@ class _team_spaceState extends State<team_space> {
                     backgroundImage: NetworkImage(img ?? ''),
                   ),
                 ),
-                SizedBox(width: 8), // 프로필 사진과 텍스트 사이의 간격
+                const SizedBox(width: 8), // 프로필 사진과 텍스트 사이의 간격
                 Text(
                   name ?? '',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
                   ),
@@ -135,7 +135,7 @@ class _team_spaceState extends State<team_space> {
               }),
             ),
           ),
-          Expanded(flex: 1, child: LinkAdd()),
+          const Expanded(flex: 1, child: LinkAdd()),
         ],
       ),
     );

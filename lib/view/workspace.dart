@@ -6,7 +6,7 @@ import 'tag_page.dart';
 import 'tag_detail_page.dart';
 
 class Workspace extends StatelessWidget {
-  Workspace(
+  const Workspace(
       {super.key, required this.name, required this.tags, required this.image});
 
   final List<String> tags;
@@ -18,7 +18,7 @@ class Workspace extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
       width: 240,
-      height: 200,
+      height: 220,
       child: GestureDetector(
         onTap: () {
           Get.to(() => team_space(), arguments: [name, image]);
@@ -27,7 +27,7 @@ class Workspace extends StatelessWidget {
           children: [
             Container(
               width: 240,
-              height: 160,
+              height: 180,
               margin: const EdgeInsets.only(top: 20, bottom: 20),
               decoration: BoxDecoration(
                 border: Border.all(
@@ -37,35 +37,44 @@ class Workspace extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.only(left: 15, top: 45),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        name,
-                        style: const TextStyle(
-                          fontSize: 30,
-                          fontFamily: 'JalnanGothic',
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Expanded(
+                    flex: 8,
+                    child: Container(
+                      padding: const EdgeInsets.only(left: 15, top: 45),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          name,
+                          style: const TextStyle(
+                            fontSize: 26,
+                            fontFamily: 'JalnanGothic',
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
+                  Expanded(
+                    flex: 2,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        TagButton(
+                          text: tags[0],
+                        ),
+                        TagButton(
+                          text: tags[1],
+                        ),
+                        TagButton(
+                          text: tags[2],
+                        ),
+                      ],
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TagButton(
-                        text: tags[0],
-                      ),
-                      TagButton(
-                        text: tags[1],
-                      ),
-                      TagButton(
-                        text: tags[2],
-                      ),
-                    ],
+                  const SizedBox(
+                    height: 18,
                   ),
                 ],
               ),
@@ -108,11 +117,17 @@ class TagButton extends StatelessWidget {
         ),
         minimumSize: const Size(5, 5),
       ),
-      child: Text(
-        "#$text",
-        style: const TextStyle(
-          color: Colors.black87,
-          fontSize: 12,
+      child: SizedBox(
+        width: 40,
+        child: Text(
+          "#$text",
+          style: const TextStyle(
+            color: Colors.black87,
+            fontSize: 12,
+          ),
+          textAlign: TextAlign.left,
+          softWrap: false,
+          overflow: TextOverflow.ellipsis,
         ),
       ),
     );

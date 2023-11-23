@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
 import '../model/teamspace_model.dart';
+import '../meta_data.dart';
 
 class TeamSpaceController extends GetxController {
   var ts = TeamSpaceModel().obs;
@@ -13,8 +14,13 @@ class TeamSpaceController extends GetxController {
   }
 
   Future<void> fetchTeamSpaceDataFromServer() async {
+    dio.options.baseUrl = URL;
+    dio.options.headers['Authorization'] = 'Bearer $accessToken';
+    dio.options.headers['Content-Type'] = 'application/json';
+    dio.options.headers['Accept'] = 'application/json';
+
     try {
-      final response = await dio.get('YOUR_SERVER_ENDPOINT'); // 서버의 엔드포인트로 수정
+      final response = await dio.get('/user-team/my/participations');
       if (response.statusCode == 200) {
         ts.value = TeamSpaceModel.fromJson(response.data);
       } else {

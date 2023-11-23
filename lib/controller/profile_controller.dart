@@ -15,6 +15,9 @@ class ProfileController extends GetxController {
 
   Future<void> fetchPostFromJson() async {
     dio.options.baseUrl = URL;
+    dio.options.headers['Authorization'] = 'Bearer $accessToken';
+    dio.options.headers['Content-Type'] = 'application/json';
+    dio.options.headers['Accept'] = 'application/json';
 
     try {
       final response = await dio.get('/user/my/profile'); // 서버 엔드포인트

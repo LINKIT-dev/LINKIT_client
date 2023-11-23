@@ -23,7 +23,7 @@ class SettingAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: true,
-      backgroundColor: Color(pColor),
+      backgroundColor: const Color(pColor),
       title: const Text(
         'settings ⚙️',
         style: TextStyle(
@@ -34,7 +34,7 @@ class SettingAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
 class SettingBody extends StatelessWidget {
@@ -46,7 +46,7 @@ class SettingBody extends StatelessWidget {
       content: const Text('⚒️ 서비스 준비 중입니다. ⚒️'),
       textCancel: '취소',
       onCancel: Get.back,
-      buttonColor: Color(pColor),
+      buttonColor: const Color(pColor),
       cancelTextColor: Colors.black,
     );
   }
@@ -68,7 +68,7 @@ class SettingBody extends StatelessWidget {
               leading: Icon(Icons.add),
               title: Text('Team Add'),
               onPressed: (BuildContext context) {
-                Get.to(() => TeamAddPage());
+                Get.to(() => TeamSpaceAddPage());
               },
             ),
             SettingsTile.navigation(

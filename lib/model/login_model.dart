@@ -1,3 +1,6 @@
+import 'package:dio/dio.dart';
+import '../meta_data.dart';
+
 class LoginModel {
   String? uid;
   String? pw;
@@ -18,15 +21,29 @@ class LoginModel {
 }
 
 class AuthService {
-  Future<bool> login(String email, String password) async {
-    // 서버에 로그인 요청을 보내는 로직 구현
-    // HTTP 통신을 사용하여 로그인 요청을 보내고 결과를 반환합니다.
-    // http.post('your_api_endpoint', body: user.toJson());
-    // 로그인 성공 시 true, 실패 시 false 반환
-    return true; // 임시 반환값
-  }
+  String token = '';
 
-  Future<bool> register(String username, String email, String password) async {
-    return true;
+  Future<bool> login(String uid, String password) async {
+    Dio dio = Dio();
+    dio.options.baseUrl = URL;
+
+    try {
+      final response = await dio
+          .post('/auth/login', data: {'uid': uid, 'password': password});
+
+      if (response.statusCode == 200) {
+        token = response.data['accessToken'];
+        accessToken = token;
+        return true;
+      } else {
+        // 서버에서 비정상적인 상태 코드를 반환했을 경우
+        print('서버 오류: ${response.statusCode}');
+        return false;
+      }
+    } catch (e) {
+      // 그 외 예외 처리
+      print('예외 발생: $e');
+      return false;
+    }
   }
 }

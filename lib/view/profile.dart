@@ -16,8 +16,11 @@ class _ProfileContainerState extends State<ProfileContainer> {
 
   @override
   Widget build(BuildContext context) {
+    String uid = pc.pm.value.uid ?? 'User';
+    String img =
+        pc.pm.value.profileImg ?? 'https://i.ibb.co/V9rV08m/logo-003.jpg';
     return Container(
-      padding: EdgeInsets.only(left: 30, right: 30),
+      padding: const EdgeInsets.only(left: 30, right: 30),
       width: 360,
       height: 120,
       decoration: BoxDecoration(
@@ -29,7 +32,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Text(
-            "HELLO,\n${pc.pm.value.uid}",
+            "HELLO,\n$uid",
             style: const TextStyle(
               fontSize: 25,
               fontFamily: 'jalnanGothic',
@@ -40,7 +43,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
             backgroundColor: Colors.black87, // 태두리 색상
             child: CircleAvatar(
               radius: 42,
-              backgroundImage: NetworkImage(pc.pm.value.profileImg ?? ''),
+              backgroundImage: NetworkImage(img),
             ),
           ),
         ],

@@ -42,7 +42,6 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final ScrollController _scrollController = ScrollController();
-  final _profileController = Get.put(ProfileController());
 
   @override
   void dispose() {
@@ -71,18 +70,18 @@ class _MainPageState extends State<MainPage> {
                     Line(width: 320),
                     SearchContainer(),
                     Line(width: 320),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     VsScrollbar(
                       controller: _scrollController,
                       showTrackOnHover: true, // default false
                       isAlwaysShown: true, // default false
-                      scrollbarFadeDuration: Duration(
+                      scrollbarFadeDuration: const Duration(
                           milliseconds:
                               500), // default : Duration(milliseconds: 300)
-                      scrollbarTimeToFade: Duration(
+                      scrollbarTimeToFade: const Duration(
                           milliseconds:
                               800), // default : Duration(milliseconds: 600)
-                      style: VsScrollbarStyle(
+                      style: const VsScrollbarStyle(
                         hoverThickness: 10.0, // default 12.0
                         radius:
                             Radius.circular(10), // default Radius.circular(8.0)
@@ -140,14 +139,14 @@ List<Widget> _Workspace() {
       Get.put(TeamSpaceController());
 
   List<Widget> wd = [];
-  int? teamCount = teamspaceController.ts.value.teamNum;
+  int? teamCount = teamspaceController.ts.value.totalTeamCount ?? 0;
 
   if (teamCount == 0) {
     wd.add(
       Container(
         padding: const EdgeInsets.only(top: 30),
         child: CircleAvatar(
-          backgroundColor: Color(pColor), // 원하는 배경색 설정
+          backgroundColor: const Color(pColor), // 원하는 배경색 설정
           radius: 30, // 원의 반지름 조정으로 크기 조절
           child: IconButton(
             icon: const Icon(Icons.add),
@@ -155,7 +154,7 @@ List<Widget> _Workspace() {
             color: Colors.white, // 아이콘 색상 설정
             onPressed: () {
               // 버튼 클릭 시 실행할 동작
-              Get.to(() => TeamAddPage());
+              Get.to(() => TeamSpaceAddPage());
             },
           ),
         ),
@@ -165,10 +164,19 @@ List<Widget> _Workspace() {
   } else {
     for (int i = 0; i < teamCount!; i++) {
       final team = teamspaceController.ts.value.teams?[i];
+      if (team?.totalHashtagCount == 0) {
+        team?.top3Hashtags = ['tag1', 'tag2', 'tag3'];
+      } else if (team?.totalHashtagCount == 1) {
+        team?.top3Hashtags?.add('tag1');
+        team?.top3Hashtags?.add('tag2');
+      } else if (team?.totalHashtagCount == 2) {
+        team?.top3Hashtags?.add('tag1');
+      }
+
       wd.add(Workspace(
-        name: team?.teamName ?? 'Invalid Team',
-        tags: team?.tags ?? ['tag1', 'tag2', 'tag3'],
-        image: team?.logoImage ?? '', // 여기에 적절한 값이 필요
+        name: team?.name ?? 'Invalid Team',
+        tags: team?.top3Hashtags ?? ['tag1', 'tag2', 'tag3'],
+        image: team?.profileImg ?? '', // 여기에 적절한 값이 필요
       ));
     }
 

@@ -1,47 +1,62 @@
 class TeamSpaceModel {
-  int? teamNum;
-  List<TeamModel>? teams;
+  List<Teams>? teams;
+  int? totalTeamCount;
 
-  TeamSpaceModel({this.teamNum, this.teams});
+  TeamSpaceModel({this.teams, this.totalTeamCount});
 
   TeamSpaceModel.fromJson(Map<String, dynamic> json) {
-    teamNum = int.tryParse(json['totalTeamCount']) ?? 0;
     if (json['teams'] != null) {
-      teams = <TeamModel>[];
+      teams = <Teams>[];
       json['teams'].forEach((v) {
-        teams!.add(new TeamModel.fromJson(v));
+        teams!.add(new Teams.fromJson(v));
       });
     }
+    totalTeamCount = json['totalTeamCount'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['totalTeamCount'] = this.teamNum;
     if (this.teams != null) {
       data['teams'] = this.teams!.map((v) => v.toJson()).toList();
     }
+    data['totalTeamCount'] = this.totalTeamCount;
     return data;
   }
 }
 
-class TeamModel {
-  String? teamName;
-  String? logoImage;
-  List<String>? tags;
+class Teams {
+  int? teamId;
+  String? name;
+  String? profileImg;
+  List<String>? memberProfileImgs;
+  List<String>? top3Hashtags;
+  int? totalHashtagCount;
 
-  TeamModel({this.teamName, this.logoImage, this.tags});
+  Teams(
+      {this.teamId,
+      this.name,
+      this.profileImg,
+      this.memberProfileImgs,
+      this.top3Hashtags,
+      this.totalHashtagCount});
 
-  TeamModel.fromJson(Map<String, dynamic> json) {
-    teamName = json['name'];
-    logoImage = json['profileImg'];
-    tags = json['top3Hashtags'].cast<String>();
+  Teams.fromJson(Map<String, dynamic> json) {
+    teamId = json['teamId'];
+    name = json['name'];
+    profileImg = json['profileImg'];
+    memberProfileImgs = json['memberProfileImgs'].cast<String>();
+    top3Hashtags = json['top3Hashtags'].cast<String>();
+    totalHashtagCount = json['totalHashtagCount'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.teamName;
-    data['profileImg'] = this.logoImage;
-    data['top3Hashtags'] = this.tags;
+    data['teamId'] = this.teamId;
+    data['name'] = this.name;
+    data['profileImg'] = this.profileImg;
+    data['memberProfileImgs'] = this.memberProfileImgs;
+    data['top3Hashtags'] = this.top3Hashtags;
+    data['totalHashtagCount'] = this.totalHashtagCount;
     return data;
   }
 }
