@@ -5,8 +5,6 @@ import '../meta_data.dart';
 
 class TeamSpaceController extends GetxController {
   var ts = TeamSpaceModel().obs;
-  Dio dio = Dio();
-
   @override
   void onInit() {
     super.onInit();

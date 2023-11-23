@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../meta_data.dart';
-import '../controller/team_add_controller.dart';
 import '../model/team_add_model.dart';
+import 'package:get/get.dart';
 
 class TeamSpaceAddPage extends StatefulWidget {
   @override
@@ -13,21 +13,53 @@ class _TeamSpaceAddPageState extends State<TeamSpaceAddPage> {
   final TextEditingController profileImgUrlController = TextEditingController();
   final TextEditingController capacityController = TextEditingController();
 
-  void handleSubmit() async {
-    final String name = nameController.text;
-    final String profileImgUrl = profileImgUrlController.text;
-    final int capacity = int.tryParse(capacityController.text) ?? 0;
-
-    TeamSpaceAddModel teamSpaceAddModel = TeamSpaceAddModel(
-      name: name,
-      profileImgUrl: profileImgUrl,
-      capacity: capacity,
+  void showErrorDialog() {
+    Get.defaultDialog(
+      title: '오류',
+      content: const Text('저장되지 않았습니다.'),
+      textCancel: '닫기',
+      onCancel: Get.back,
     );
+  }
 
-    // 서버로 데이터 전송하는 로직 구현
-    // 예: await sendTeamSpaceData(teamSpaceAddModel);
+  void showFieldError() {
+    Get.defaultDialog(
+      title: '오류',
+      content: const Text('Name and Capacity are required.'),
+      textCancel: '닫기',
+      onCancel: Get.back,
+    );
+  }
 
-    // 서버 응답에 따른 UI 반응 구현
+  void showSuccess() {
+    Get.defaultDialog(
+      title: '성공',
+      content: const Text('저장되었습니다..'),
+      textCancel: '닫기',
+      onCancel: Get.back,
+    );
+  }
+
+  void handleSubmit() async {
+    String name = nameController.text.trim();
+    String profileImgUrl = profileImgUrlController.text.trim();
+    String capacityStr = capacityController.text.trim();
+
+    if (name.isEmpty || capacityStr.isEmpty) {
+      showFieldError();
+      return;
+    }
+
+    int capacity = int.tryParse(capacityStr) ?? 0;
+
+    TeamAddService teamAddService = TeamAddService();
+    bool isAdded = await teamAddService.addTeam(name, profileImgUrl, capacity);
+
+    if (isAdded) {
+      showSuccess();
+    } else {
+      showErrorDialog();
+    }
   }
 
   @override
@@ -55,10 +87,10 @@ class _TeamSpaceAddPageState extends State<TeamSpaceAddPage> {
             const SizedBox(height: 20), // 간격 추가
             ElevatedButton(
               onPressed: handleSubmit,
-              child: const Text('Submit'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(pColor), // 버튼 색상 조정
               ),
+              child: const Text('Submit'),
             ),
           ],
         ),

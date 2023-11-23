@@ -5,7 +5,6 @@ import '../meta_data.dart';
 
 class ProfileController extends GetxController {
   var pm = ProfileModel().obs;
-  Dio dio = Dio();
 
   @override
   void onInit() {
