@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:linkit_client/model/tag_model.dart';
-import 'package:linkit_client/view/tag_detail_page.dart';
-import '../meta_data.dart'; // 이 파일에 dColor와 pColor를 정의하세요
+import '../model/tag_model.dart';
 import 'tag_detail_page.dart';
+import '../meta_data.dart'; // 이 파일에 dColor와 pColor를 정의하세요
 import '../controller/tag_controller.dart';
 
 class TagPage extends StatefulWidget {
@@ -29,7 +28,7 @@ class _TagPageState extends State<TagPage> {
             mainAxisSpacing: 10,
           ),
           itemCount:
-              tagController.tags.length, // tagController의 tags 리스트를 사용합니다.
+          tagController.tags.length, // tagController의 tags 리스트를 사용합니다.
           itemBuilder: (context, index) {
             final hashtag = tagController.tags[index].hashtagName;
             return GestureDetector(

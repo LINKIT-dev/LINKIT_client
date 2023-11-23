@@ -1,11 +1,16 @@
 import 'package:get/get.dart';
-import 'package:dio/dio.dart';
 import '../model/teamspace_model.dart';
+<<<<<<< HEAD
 import '../meta_data.dart';
+=======
+import 'package:dio/dio.dart';
+>>>>>>> 33271732cdda9c4d2d461217a30d27a429e55068
 
 class TeamSpaceController extends GetxController {
+  // TeamSpaceModel을 관찰 가능한 상태로 만듭니다.
   var ts = TeamSpaceModel().obs;
   Dio dio = Dio();
+
 
   @override
   void onInit() {

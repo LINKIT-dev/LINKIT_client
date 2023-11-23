@@ -7,6 +7,7 @@ import '../view/chat.dart';
 import 'linkAdd.dart';
 import '../controller/chat_controller.dart';
 import '../controller/userlike_controller.dart';
+import '../model/chat_model.dart';
 
 class team_space extends StatefulWidget {
   const team_space({super.key});
@@ -114,20 +115,25 @@ class _team_spaceState extends State<team_space> {
               radius: const Radius.circular(10),
               child: Obx(() {
                 return ListView.builder(
-                  itemCount: chatController.Posts.length,
+                  itemCount: chatController.Posts.value.totalLinkCount,
                   itemBuilder: (context, index) {
+                    final linkItem = chatController.Posts.value.links?[index];
+                    final isCurrentUser = linkItem?.userVO?.uid ==
+                        _profileController.pm.value.uid;
+
                     return Column(
                       children: [
-                        chatController.Posts[index].username ==
-                                _profileController.pm.value.uid
+                        isCurrentUser
                             ? UsrChatForm(
-                                post: chatController.Posts[index],
-                                like: userlikeController.Likes[index],
+                                post: linkItem,
+                                like: userlikeController
+                                    .Likes[index], // 여기서 필요한 like 정보를 적절히 전달
                               )
                             : OthChatForm(
-                                post: chatController.Posts[index],
-                                like: userlikeController.Likes[index],
-                              ),
+                                post: linkItem,
+                                like: userlikeController
+                                    .Likes[index], // 여기서 필요한 like 정보를 적절히 전달
+                              )
                       ],
                     );
                   },
