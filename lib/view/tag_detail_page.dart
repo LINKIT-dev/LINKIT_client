@@ -39,7 +39,7 @@ class _TagPageState extends State<TagDetailPage> {
             ),
           ),
           title: Container(
-            padding: EdgeInsets.only(top: 16),
+            padding: const EdgeInsets.only(top: 16),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[

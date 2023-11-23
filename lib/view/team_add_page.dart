@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../meta_data.dart';
 import '../controller/team_add_controller.dart';
 import '../model/team_add_model.dart';
+import 'package:dio/dio.dart' as dio;
 
 class TeamAddPage extends StatelessWidget {
   TeamAddPage({super.key});
@@ -37,7 +38,9 @@ class TeamAddPage extends StatelessWidget {
                   teamName: teamNameController.text,
                   imageUrl: imageUrlController.text,
                 );
-                teamController.sendTeamData(teamData).then((response) {
+                teamController
+                    .sendTeamData(teamData)
+                    .then((dio.Response response) {
                   if (response.statusCode == 200) {
                     // 성공적으로 데이터가 전송되었을 때의 로직
                     Get.bottomSheet(

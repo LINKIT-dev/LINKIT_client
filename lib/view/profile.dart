@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:linkit_client/controller/profile_controller.dart';
 import '../model/profile_model.dart';
 
 class ProfileContainer extends StatefulWidget {
-  final ProfileModel profile;
-
-  const ProfileContainer({super.key, required this.profile});
+  const ProfileContainer({super.key});
 
   @override
   State<ProfileContainer> createState() => _ProfileContainerState();
@@ -12,6 +12,7 @@ class ProfileContainer extends StatefulWidget {
 
 class _ProfileContainerState extends State<ProfileContainer> {
   // ProfileController 인스턴스를 가져오거나 생성합니다.
+  final ProfileController pc = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Text(
-            "HELLO,\n${widget.profile.name}",
+            "HELLO,\n${pc.pm.value.uid}",
             style: const TextStyle(
               fontSize: 25,
               fontFamily: 'jalnanGothic',
@@ -39,7 +40,7 @@ class _ProfileContainerState extends State<ProfileContainer> {
             backgroundColor: Colors.black87, // 태두리 색상
             child: CircleAvatar(
               radius: 42,
-              backgroundImage: NetworkImage(widget.profile.profile_image),
+              backgroundImage: NetworkImage(pc.pm.value.profileImg ?? ''),
             ),
           ),
         ],

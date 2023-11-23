@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../view/copylink.dart';
 import '../view/tag.dart';
+import 'tag_detail_page.dart';
 
 void showPost(BuildContext context, String image_url, String title,
     String description, String _url, List<String> tags) {
@@ -91,9 +92,10 @@ void showPost(BuildContext context, String image_url, String title,
                   Wrap(
                     spacing: 8.0, // 태그 사이의 가로 간격
                     runSpacing: 4.0, // 태그 사이의 세로 간격
-                    children: tags.map((tag) => ElevatedButton(
+                    children: tags
+                        .map((tag) => ElevatedButton(
                               onPressed: () {
-                                // 태그 버튼 클릭 시 동작
+                                Get.to(() => TagDetailPage(), arguments: tag);
                               },
                               style: ButtonStyle(
                                 backgroundColor:

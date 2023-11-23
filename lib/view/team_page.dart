@@ -56,12 +56,12 @@ class _team_spaceState extends State<team_space> {
                   backgroundColor: Colors.black87, // 태두리 색상
                   child: CircleAvatar(
                     radius: 20,
-                    backgroundImage: NetworkImage(img??''),
+                    backgroundImage: NetworkImage(img ?? ''),
                   ),
                 ),
                 SizedBox(width: 8), // 프로필 사진과 텍스트 사이의 간격
                 Text(
-                  name??'',
+                  name ?? '',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
@@ -118,7 +118,8 @@ class _team_spaceState extends State<team_space> {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        chatController.Posts[index].username == _profileController.pm.value.name
+                        chatController.Posts[index].username ==
+                                _profileController.pm.value.uid
                             ? UsrChatForm(
                                 post: chatController.Posts[index],
                                 like: userlikeController.Likes[index],
