@@ -27,7 +27,7 @@ class Home extends StatelessWidget {
 
     return Scaffold(
       body: Obx(
-          () => tabPages[BottomNavgationBarController.to.selectedIndex.value]),
+              () => tabPages[BottomNavgationBarController.to.selectedIndex.value]),
       bottomNavigationBar: BottomNavgationBarView(),
     );
   }
@@ -55,51 +55,52 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Obx(() => Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    "assets/image/linkit_bg.png",
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                "assets/image/linkit_bg.png",
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ProfileContainer(),
+                Line(width: 320),
+                SearchContainer(),
+                Line(width: 320),
+                SizedBox(height: 15),
+                VsScrollbar(
+                  controller: _scrollController,
+                  showTrackOnHover: true, // default false
+                  isAlwaysShown: true, // default false
+                  scrollbarFadeDuration: Duration(
+                      milliseconds:
+                      500), // default : Duration(milliseconds: 300)
+                  scrollbarTimeToFade: Duration(
+                      milliseconds:
+                      800), // default : Duration(milliseconds: 600)
+                  style: VsScrollbarStyle(
+                    hoverThickness: 10.0, // default 12.0
+                    radius:
+                    Radius.circular(10), // default Radius.circular(8.0)
+                    thickness: 5.0, // [ default 8.0 ]
                   ),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ProfileContainer(),
-                    Line(width: 320),
-                    SearchContainer(),
-                    Line(width: 320),
-                    SizedBox(height: 15),
-                    VsScrollbar(
-                      controller: _scrollController,
-                      showTrackOnHover: true, // default false
-                      isAlwaysShown: true, // default false
-                      scrollbarFadeDuration: Duration(
-                          milliseconds:
-                              500), // default : Duration(milliseconds: 300)
-                      scrollbarTimeToFade: Duration(
-                          milliseconds:
-                              800), // default : Duration(milliseconds: 600)
-                      style: VsScrollbarStyle(
-                        hoverThickness: 10.0, // default 12.0
-                        radius:
-                            Radius.circular(10), // default Radius.circular(8.0)
-                        thickness: 5.0, // [ default 8.0 ]
-                      ),
-                      child: SingleChildScrollView(
-                        controller: _scrollController,
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: _Workspace(),
-                        ),
-                      ),
+                  child: SingleChildScrollView(
+                    controller: _scrollController,
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: _Workspace(),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            )));
+              ],
+            ),
+          ),
+        )));
+
   }
 }
 
@@ -137,10 +138,11 @@ class SearchContainer extends StatelessWidget {
 
 List<Widget> _Workspace() {
   final TeamSpaceController teamspaceController =
-      Get.put(TeamSpaceController());
+  Get.put(TeamSpaceController());
 
   List<Widget> wd = [];
   int? teamCount = teamspaceController.ts.value.teamNum;
+
 
   if (teamCount == 0) {
     wd.add(
@@ -175,3 +177,4 @@ List<Widget> _Workspace() {
     return wd;
   }
 }
+
