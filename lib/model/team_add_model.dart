@@ -1,4 +1,4 @@
-import 'package:linkit_client/meta_data.dart';
+import '../meta_data.dart';
 import 'package:dio/dio.dart';
 
 class TeamSpaceAddModel {
@@ -25,16 +25,20 @@ class TeamSpaceAddModel {
 
 class TeamAddService {
   Future<bool> addTeam(String name, String profileImgUrl, int capacity) async {
-    dio.options.baseUrl = URL;
+    Dio dio = Dio();
     dio.options.headers['Authorization'] = 'Bearer $accessToken';
     dio.options.headers['Content-Type'] = 'application/json';
     dio.options.headers['Accept'] = 'application/json';
 
     try {
-      final response = await dio.post(
-          '/team?name=$name&profileImgUrl=$profileImgUrl&capacity=$capacity');
+      final response = await dio.post('/team', data: {
+        'name': name,
+        'profileImgUrl': profileImgUrl,
+        'capacity': capacity
+      });
 
       if (response.statusCode == 200) {
+        print('success');
         return true;
       } else {
         // 서버에서 비정상적인 상태 코드를 반환했을 경우
@@ -47,6 +51,7 @@ class TeamAddService {
       print('Response data: ${e.response?.data}');
       print('Headers: ${e.response?.headers}');
       print('예외 발생: $e');
+      return false;
       return false;
     }
   }

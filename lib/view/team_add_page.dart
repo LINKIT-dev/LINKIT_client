@@ -41,9 +41,9 @@ class _TeamSpaceAddPageState extends State<TeamSpaceAddPage> {
   }
 
   void handleSubmit() async {
-    String name = nameController.text.trim();
-    String profileImgUrl = profileImgUrlController.text.trim();
-    String capacityStr = capacityController.text.trim();
+    String name = nameController.text;
+    String profileImgUrl = profileImgUrlController.text;
+    String capacityStr = capacityController.text;
 
     if (name.isEmpty || capacityStr.isEmpty) {
       showFieldError();
