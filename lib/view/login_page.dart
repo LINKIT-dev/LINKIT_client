@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:linkit_client/meta_data.dart';
 import '../model/login_model.dart';
 import 'home_page.dart';
 
@@ -55,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                   ),
                   SizedBox(
@@ -68,11 +69,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   TextField(
                     controller: _uidController,
-                    decoration: InputDecoration(labelText: 'ID'),
+                    decoration: const InputDecoration(labelText: 'ID'),
                   ),
                   TextField(
                     controller: _pwController,
-                    decoration: InputDecoration(labelText: 'Password'),
+                    decoration: const InputDecoration(labelText: 'Password'),
                     obscureText: true,
                   ),
                   const SizedBox(
@@ -81,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                   ElevatedButton(
                     onPressed: _login,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xffffadb6),
+                      backgroundColor: const Color(pColor),
                     ),
                     child: const Text('Login'),
                   ),

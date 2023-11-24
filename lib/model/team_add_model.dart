@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:linkit_client/meta_data.dart';
+import 'package:dio/dio.dart';
 
 class TeamSpaceAddModel {
   String? name;
@@ -26,13 +26,13 @@ class TeamSpaceAddModel {
 class TeamAddService {
   Future<bool> addTeam(String name, String profileImgUrl, int capacity) async {
     dio.options.baseUrl = URL;
-
-    final data = TeamSpaceAddModel(
-        name: name, profileImgUrl: profileImgUrl, capacity: capacity)
-        .toJson();
+    dio.options.headers['Authorization'] = 'Bearer $accessToken';
+    dio.options.headers['Content-Type'] = 'application/json';
+    dio.options.headers['Accept'] = 'application/json';
 
     try {
-      final response = await dio.post('/team', data: data);
+      final response = await dio.post(
+          '/team?name=$name&profileImgUrl=$profileImgUrl&capacity=$capacity');
 
       if (response.statusCode == 200) {
         return true;
@@ -41,7 +41,7 @@ class TeamAddService {
         print('서버 오류: ${response.statusCode}');
         return false;
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       // 그 외 예외 처리
       print('Error sending data: ${e.response?.statusCode}');
       print('Response data: ${e.response?.data}');

@@ -1,4 +1,4 @@
-
+import 'package:dio/dio.dart';
 import '../meta_data.dart';
 
 class LoginModel {
@@ -24,6 +24,7 @@ class AuthService {
   String token = '';
 
   Future<bool> login(String uid, String password) async {
+    Dio dio = Dio();
     dio.options.baseUrl = URL;
 
     try {

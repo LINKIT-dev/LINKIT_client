@@ -34,23 +34,26 @@ class Links {
   String? linkPreviewImg;
   List<String>? tags;
   String? url;
+  bool? isLikePressed;
 
   Links(
       {this.userVO,
-        this.title,
-        this.content,
-        this.linkPreviewImg,
-        this.tags,
-        this.url});
+      this.title,
+      this.content,
+      this.linkPreviewImg,
+      this.tags,
+      this.url,
+      this.isLikePressed});
 
   Links.fromJson(Map<String, dynamic> json) {
     userVO =
-    json['userVO'] != null ? new UserVO.fromJson(json['userVO']) : null;
+        json['userVO'] != null ? new UserVO.fromJson(json['userVO']) : null;
     title = json['title'];
     content = json['content'];
     linkPreviewImg = json['linkPreviewImg'];
     tags = json['tags'].cast<String>();
     url = json['url'];
+    isLikePressed = json['isLikePressed'];
   }
 
   Map<String, dynamic> toJson() {
@@ -63,6 +66,7 @@ class Links {
     data['linkPreviewImg'] = this.linkPreviewImg;
     data['tags'] = this.tags;
     data['url'] = this.url;
+    data['isLikePressed'] = this.isLikePressed;
     return data;
   }
 }

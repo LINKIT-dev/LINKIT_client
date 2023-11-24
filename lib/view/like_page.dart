@@ -5,6 +5,7 @@ import '../controller/userlike_controller.dart';
 import '../view/team_page.dart';
 import '../view/chat.dart';
 import '../controller/chat_controller.dart';
+import '../controller/like_links_controller.dart';
 
 class like_space extends StatefulWidget {
   const like_space({super.key});
@@ -14,7 +15,8 @@ class like_space extends StatefulWidget {
 }
 
 class _like_spaceState extends State<like_space> {
-  final ChatController chatController = Get.put(ChatController());
+  final LikePostController likePostControllerController =
+      Get.put(LikePostController());
   final UserLikeController userlikeController = Get.put(UserLikeController());
   final ProfileController _profileController = Get.put(ProfileController());
 
@@ -72,24 +74,24 @@ class _like_spaceState extends State<like_space> {
           radius: const Radius.circular(10),
           child: Obx(() {
             return ListView.builder(
-              itemCount: chatController.Posts.value.totalLinkCount,
+              itemCount: likePostControllerController.likedPosts.length,
               itemBuilder: (context, index) {
-                final linkItem = chatController.Posts.value.links?[index];
-                final isCurrentUser = linkItem?.userVO?.uid ==
-                    _profileController.pm.value.uid;
+                final linkItem = likePostControllerController.likedPosts[index];
+                final isCurrentUser =
+                    linkItem?.userVO?.uid == _profileController.pm.value.uid;
                 return Column(
                   children: [
                     isCurrentUser
                         ? UsrChatForm(
-                      post: linkItem,
-                      like: userlikeController
-                          .Likes[index], // 여기서 필요한 like 정보를 적절히 전달
-                    )
+                            post: linkItem,
+                            like: userlikeController
+                                .Likes[index], // 여기서 필요한 like 정보를 적절히 전달
+                          )
                         : OthChatForm(
-                      post: linkItem,
-                      like: userlikeController
-                          .Likes[index], // 여기서 필요한 like 정보를 적절히 전달
-                    )
+                            post: linkItem,
+                            like: userlikeController
+                                .Likes[index], // 여기서 필요한 like 정보를 적절히 전달
+                          )
                   ],
                 );
               },

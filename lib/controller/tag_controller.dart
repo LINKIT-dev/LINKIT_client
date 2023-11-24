@@ -1,10 +1,8 @@
 import 'package:get/get.dart';
-import 'package:dio/dio.dart';
-import '../model/tag_model.dart'; // 경로를 확인하세요.
 import '../meta_data.dart';
 
 class TagController extends GetxController {
-  var tags = <TagModel>[].obs;
+  var tags = <String>[].obs; // RxList<String> 타입으로 변경
 
   @override
   void onInit() {
@@ -20,11 +18,10 @@ class TagController extends GetxController {
     dio.options.headers['Accept'] = 'application/json';
 
     try {
-      final response = await dio.get('/hashtag/all-hashtags'); // 서버의 엔드포인트로 수정
+      final response = await dio.get('/hashtag/all-hashtags');
       if (response.statusCode == 200) {
-        final List<dynamic> tagsData = response.data['hashtags'];
-        tags.value =
-            tagsData.map((tagData) => TagModel.fromJson(tagData)).toList();
+        // 서버에서 받은 데이터를 직접 문자열 리스트로 변환
+        tags.value = List<String>.from(response.data);
       } else {
         // 오류 처리
         print('Failed to fetch tags: ${response.statusCode}');
